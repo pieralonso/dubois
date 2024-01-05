@@ -2,16 +2,41 @@
   box-sizing: border-box;
 }
 
-body {
+body, h1, h2, h3, h4, p{
   padding: 0;
   margin: 0;
 }
 
-menu, li {
+menu, li, ol {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
+a {
+  text-decoration: none;
+  color: peru;
+}
+
+.header__content {
+  font-size: 1.4em;
+  line-height: 18px;
+}
+
+.section, .header {
+  padding: 0 10px;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 15px 10px;
+}
+
+
+
+
+
 
 
 

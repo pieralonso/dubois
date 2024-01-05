@@ -1,8 +1,12 @@
-const grades = Array.from(document.getElementsByClassName('grades'));
+/*
+Al hacer click en un grado 
+1- cambiar el titulo
+2- generar las palabras en cada parte
 
-for(element of grades) {
-	element.addEventListener('click', function(event) {
-		const title = document.getElementById('grade-title');
-		title.textContent = event.target.textContent
-	});
-}
+Al hacer click en los numeros de navegacion
+
+1 - pasar al siguiente nivel cambiar el nivel
+2 - mostrar la siguiente lista de palabras con sus partes
+*/ 
+
+
