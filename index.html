@@ -1,92 +1,100 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8">
 		<title>Echelon's Dubois Buyse</title>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
-		<script defer src="/script.js"></script>
+		<script defer src="script.js"></script>
 	</head>
-	<body>
-		<header class="header">
-			<a href=""><h1 class="header__content">Dubois <br> &nbsp;&nbsp;&nbsp;  Buyse <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Echelon's</h1></a>
-		</header>
-		<main class="main">
-			<section class="section">
-				<header class="section__header">
-					<h2>Pagina Principal</h2>
-					<p>Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion</p>
-				</header>
-				<nav class="nav">
-					<section class="nav__section">
-						<h3 class="nav-item">Ecole Primaire</h3>
-						<nav class="sub__nav">
-							<a class="sub__nav--item" href="#content-section">CP et CE1</a>
-							<a class="sub__nav--item" href="#content-section">CE2</a>
-							<a class="sub__nav--item" href="#content-section">CM1</a>
-							<a class="sub__nav--item" href="#content-section">CM2</a>
-						</nav>
-					</section>
-					<section class="nav__section">
-						<h3 class="nav-item">College et Lyce</h3>
-						<nav class="sub__nav">
-							<a class="sub__nav--item" href="#content-section">6eme</a>
-							<a class="sub__nav--item" href="#content-section">5eme et 4eme</a>
-							<a class="sub__nav--item" href="#content-section">3eme et Lyce</a>
-						</nav>
-					</section>
-				</nav>
-			</section>
-			<section class="section" id="content-section">
-				<header class="section__header">
-					<h3>Titulo ejemplo</h3>
-					<h4>Nivel 1</h4>
-				</header>
-				<section>
-					<ol class="section__list">
-						<li class="section__list--item">
-							<h4>parte 1</h4>
-							<section>
-								palabras
-							</section>
-						</li>
-						<li class="section__list--item"><h4>parte 2</h4>
-							<section>
-								palabras
-							</section>
-						</li>
-						<li class="section__list--item"><h4>parte 3</h4>
-							<section>
-								palabras
-							</section>
-						</li>
-						<li class="section__list--item"><h4>parte 4</h4>
-							<section>
-								palabras
-							</section>
-						</li>
-						<li class="section__list--item"><h4>parte 5</h4>
-							<section>
-								palabras
-							</section>
-						</li>
-					</ol>
+	<body class="body">
+		<div class="wrapper" id="wrapper">
+			<header class="header" id="header">
+				<a href="#" class="header__link"><h1 class="header__title">Dubois <br> &nbsp;&nbsp;&nbsp;  Buyse <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Echelon's</h1></a>
+			</header>
+			<main class="main" id="main">
+				<section class="main__section" id="main-section1">
+					<header class="section__header">
+						<h2 class="header__title">Pagina Principal</h2>
+						<p class="header__description">Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion Pagina principal con las opciones de navegacion</p>
+					</header>
+					<nav class="nav">
+						<section class="nav__section">
+							<h3 class="nav-item">Ecole Primaire</h3>
+							<nav class="sub__nav">
+								<a class="sub__nav--item" href="#content-section">CP et CE1</a>
+								<a class="sub__nav--item" href="#content-section">CE2</a>
+								<a class="sub__nav--item" href="#content-section">CM1</a>
+								<a class="sub__nav--item" href="#content-section">CM2</a>
+							</nav>
+						</section>
+						<section class="nav__section">
+							<h3 class="nav-item">College et Lyce</h3>
+							<nav class="sub__nav">
+								<a class="sub__nav--item" href="#content-section">6eme</a>
+								<a class="sub__nav--item" href="#content-section">5eme et 4eme</a>
+								<a class="sub__nav--item" href="#content-section">3eme et Lyce</a>
+							</nav>
+						</section>
+					</nav>
 				</section>
-				<nav class="section__nav">
-					<a class="section__nav--item" href="">1</a>
-					<a class="section__nav--item" href="">2</a>
-					<a class="section__nav--item" href="">3</a>
-					<a class="section__nav--item" href="">4</a>
-					<a class="section__nav--item" href="">5</a>
-					<a class="section__nav--item" href="">6</a>
-					<a class="section__nav--item" href="">7</a>
-					<a class="section__nav--item" href="">8</a>
-					<a class="section__nav--item" href="">9</a>
-					<a class="section__nav--item" href="">10</a>
-				</nav>
-			</section>
-		</main>
-		<footer class="footer">
-			@pieralonso
-		</footer>
+				<section class="main__section" id="content-section">
+					<header class="section__header">
+						<h3 class="section__title">Titulo ejemplo</h3>
+						<h4 class="section__subtitle">Nivel 1</h4>
+					</header>
+					<section class="content">
+						<ol class="content__list">
+							<li class="content__list--item">
+								<h4 class="content__item-title">parte 1</h4>
+								<section class="content__item-section">
+									palabras
+								</section>
+							</li>
+							<li class="content__list--item">
+								<h4 class="content__item-title">parte 2</h4>
+								<section class="content__item-section">
+									palabras
+								</section>
+							</li>
+							<li class="content__list--item">
+								<h4 class="content__item-title">parte 3</h4>
+								<section class="content__item-section">
+									palabras
+								</section>
+							</li>
+							<li class="content__list--item">
+								<h4 class="content__item-title">parte 4</h4>
+								<section class="content__item-section">
+									palabras
+								</section>
+							</li>
+							<li class="content__list--item">
+								<h4 class="content__item-title">parte 5</h4>
+								<section class="content__item-section">
+									palabras
+								</section>
+							</li>
+						</ol>
+					</section>
+					<nav class="section__nav">
+						<a class="section__nav--item" href="#">1</a>
+						<a class="section__nav--item" href="#">2</a>
+						<a class="section__nav--item" href="#">3</a>
+						<a class="section__nav--item" href="#">4</a>
+						<a class="section__nav--item" href="#">5</a>
+						<a class="section__nav--item" href="#">6</a>
+						<a class="section__nav--item" href="#">7</a>
+						<a class="section__nav--item" href="#">8</a>
+						<a class="section__nav--item" href="#">9</a>
+						<a class="section__nav--item" href="#">10</a>
+					</nav>
+				</section>
+			</main>
+			<footer class="footer" id="footer">
+				<div class="footer__content">
+					@pieralonso
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>
