@@ -1,6 +1,6 @@
 # Ignorar archivos temporales
 *.log
-*.tmp
+*.tmp.html
 app.js
 .DS_store
 
