@@ -1,99 +1,87 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="./css/styles.css">
-		<script src="./js/script.js" type="module"></script>
-		<script src="./js/duboisArray.js" type="module"></script>
-		<title>Dubois Buyse</title>
-	</head>
-	<body>
-		<div class="container">
-			<header>
-				<h1>Dubois Buyse Echellon's </h1>
-			</header>
-			
-			<main>
-				<div class="container">
-					<section>
-						<h2>Welcome</h2>
-						<p>	
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-							magna aliqua. Non arcu risus quis varius quam quisque id diam vel. Viverra vitae congue eu consequat ac felis
-							donec et. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Praesent semper feugiat nibh sed pulvinar
-							proin gravida. Ultrices sagittis orci a scelerisque purus semper eget. Maecenas sed enim ut sem viverra aliquet
-							eget. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Vulputate enim nulla aliquet porttitor lacus.
-						</p>
-					</section>
-					<nav>
-						<button type="button">Primaire</button>
-						<menu>
-							<li><a href="#">CP - CE1</a></li>
-							<li><a href="#">CE2</a></li>
-							<li><a href="#">CM1</a></li>
-							<li><a href="#">CM2</a></li>
-						</menu>
-						<button type="button">Secondaire</button>
-						<menu>
-							<li><a href="#">6EME</a></li>
-							<li><a href="#">5EME - 4EME</a></li>
-							<li><a href="#">3EME - LYCEE</a></li>
-						</menu>	
-					</nav>
-					<section>
-						<h3>Title</h3>
-						
-						<p> 
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-							magna aliqua
-						</p>
-						<section>
-							<menu>
-								<button>1</button>
-								<button>2</button>
-								<button>3</button>
-								<button>4</button>
-								<button>5</button>
-								<button>6</button>
-								<button>7</button>
-								<button>8</button>
-								<button>9</button>
-								<button>10</button>
-							</menu>
-							<section>
-								<section>
-									<h4>Section 1</h4>
-									<ul>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-										<li>mot</li>
-									</ul>
-								</section>
-							</section>
-						</section>
-					</section>
-				</div>
-			</main>
-			<footer>
-				<p>@pieralonso</p>
-			</footer>
-		</div>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <script src="./js/script.js" type="module"></script>
+    <script src="./js/duboisArray.js" type="module"></script>
+    <title>Dubois Buyse</title>
+</head>
+<body class="body" id="main-body">
+    <div class="container" id="main-container">
+        <header class="header" id="main-header">
+            <h1 class="header__title" id="site-title">Dubois Buyse Echelon's </h1>
+        </header>
+        
+        <main class="main" id="main-content">
+            <div class="main__container" id="main-content-container">
+                <section class="main__section" id="welcome-section">
+                    <h2 class="main__title" id="welcome-title">Welcome</h2>
+                    <p class="main__paragraph" id="welcome-paragraph">    
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Non arcu risus quis varius quam quisque id diam vel. Viverra vitae congue eu consequat ac felis
+                        donec et. Tempus iaculis urna id volutpat lacus laoreet non curabitur. Praesent semper feugiat nibh sed pulvinar
+                        proin gravida. Ultrices sagittis orci a scelerisque purus semper eget. Maecenas sed enim ut sem viverra aliquet
+                        eget. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Vulputate enim nulla aliquet porttitor lacus.
+                    </p>
+                </section>
+                <nav class="main__nav" id="main-navigation">
+                    <div class="menu-container">
+                        <button type="button" class="main__button" id="primary-button">Primaire</button>
+                        <ul class="main__menu hidden" id="primary-menu">
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-cpce1">CP - CE1</a></li>
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-ce2">CE2</a></li>
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-cm1">CM1</a></li>
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-cm2">CM2</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-container">
+                        <button type="button" class="main__button" id="secondary-button">Secondaire</button>
+                        <ul class="main__menu hidden" id="secondary-menu">
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-6eme">6EME</a></li>
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-54eme">5EME - 4EME</a></li>
+                            <li class="main__menu-item"><a href="#" class="main__menu-link" id="menu-item-3eme-lycee">3EME - LYCEE</a></li>
+                        </ul>    
+                    </div>
+                </nav>
+                <section class="main__section" id="title-section">
+                    <section class="main__section" id="sub-section">
+                        <h3 class="main__subtitle" id="sub-section-title">Title</h3>
+                        <p class="main__paragraph" id="sub-section-paragraph"> 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua
+                        </p>
+                    </section>
+                    <section class="main__section" id="numeric-section">
+                        <nav class="main__nav" id="numeric-navigation">
+                            <button type="button" class="main__button" id="numeric-button-1">1</button>
+                            <button type="button" class="main__button" id="numeric-button-2">2</button>
+                            <button type="button" class="main__button" id="numeric-button-3">3</button>
+                            <button type="button" class="main__button" id="numeric-button-4">4</button>
+                            <button type="button" class="main__button" id="numeric-button-5">5</button>
+                            <button type="button" class="main__button" id="numeric-button-6">6</button>
+                            <button type="button" class="main__button" id="numeric-button-7">7</button>
+                            <button type="button" class="main__button" id="numeric-button-8">8</button>
+                            <button type="button" class="main__button" id="numeric-button-9">9</button>
+                            <button type="button" class="main__button" id="numeric-button-10">10</button>
+                        </nav>
+                        <section class="main__section" id="section-1">
+                            <section class="main__section">
+                                <h4 class="main__subtitle" id="list-section-title">Section 1</h4>
+                                <ul class="main__list" id="word-list">
+                                    <li class="main__list-item">mot</li>
+                                    <li class="main__list-item">mot</li>
+                                    <li class="main__list-item">mot</li>
+                                </ul>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </div>
+        </main>
+        <footer class="footer" id="main-footer">
+            <p class="footer__text" id="footer-text">@pieralonso</p>
+        </footer>
+    </div>
+</body>
 </html>
