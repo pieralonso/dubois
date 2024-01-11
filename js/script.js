@@ -1,15 +1,36 @@
-import { duboisArray } from './duboisArray.js';
+import { duboisArray } from './duboisArray.js'
+// manejo del array 
+function echelons(a, b) {
+	var result = [];
+	for(var i = a; i <= b ; i++ ) {
+		result.push(`|${i}|`)
+	}
+	return result
+}
+function filtrarDuboisArrayConCriterio(array) {
+	let result = [];
+	for(var item of duboisArray) {
+		for(var element of array) {
+			if(item.includes(element)) {
+				result.push(item)
+			}
+			
+		}
+	}
+
+	return result
+}
 
 
 // barra de navegacion 
 document.addEventListener('DOMContentLoaded', function () {
-	var primaryButton = document.getElementById('primary-button');
-	var secondaryButton = document.getElementById('secondary-button');
-	var primaryMenu = document.getElementById('primary-menu');
-	var secondaryMenu = document.getElementById('secondary-menu');
+	const primaryButton = document.getElementById('primary-button');
+	const secondaryButton = document.getElementById('secondary-button');
+	const primaryMenu = document.getElementById('primary-menu');
+	const secondaryMenu = document.getElementById('secondary-menu');
 	const sectionTitle = document.getElementById('sub-section-title');
-	var navContainer = Array.from(document.getElementsByClassName('menu-container'));
-	var mainMenuLinks = Array.from(document.getElementsByClassName('main__menu-link'));
+	const navContainer = Array.from(document.getElementsByClassName('menu-container'));
+	const mainMenuLinks = Array.from(document.getElementsByClassName('main__menu-link'));
 	
 	primaryButton.addEventListener('click', function () {
 		primaryMenu.classList.toggle('hidden');
