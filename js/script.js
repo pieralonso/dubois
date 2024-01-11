@@ -7,19 +7,10 @@ function echelons(a, b) {
 	}
 	return result
 }
-function filtrarDuboisArrayConCriterio(array) {
-	let result = [];
-	for(var item of duboisArray) {
-		for(var element of array) {
-			if(item.includes(element)) {
-				result.push(item)
-			}
-			
-		}
-	}
-
-	return result
-}
+function filtrarArrayConCriterio(duboisArray, array) {
+	return duboisArray.filter(item => array.some(element => item.includes(element)));
+  }
+  
 
 
 // barra de navegacion 
