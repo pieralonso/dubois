@@ -6,3 +6,7 @@
 .hidden {
 	display: none;
 }
+
+.main-list-item:hover {
+	color: gray;
+}

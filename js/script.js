@@ -1,35 +1,45 @@
-import { duboisArray } from './duboisArray.js'
+import { duboisData} from './duboisArray.js'
 
 // manejo del array 
+const rango  = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 
-const dubois = duboisArray.slice().sort((a, b) => parseInt(a.split('|')[1]) - parseInt(b.split('|')[1]));
+const filtrarPor = (propiedad) => (array) => duboisData.filter(elemento => array.some(arrayItem => elemento[propiedad] === arrayItem));
 
-const generarEchelon = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => `|${a + i}|`);
-
-const filtrarPorEchelon = (echelons) => dubois.filter(item => echelons.some(e => item.includes(e)));
+const palabrasDeEchelon = filtrarPor('echelon');
 
 const organizarNiveles = array => Array.from({ length: Math.ceil(array.length / 20) }, (_, i) => array.slice(i * 20, i * 20 + 20));
 
-const cpArray = filtrarPorEchelon(generarEchelon(1, 11));
-const ce2Array = filtrarPorEchelon(generarEchelon(12, 15));
-const cm1Array = filtrarPorEchelon(generarEchelon(16, 19));
-const cm2Array = filtrarPorEchelon(generarEchelon(20, 23));
-const s6EmeArray = filtrarPorEchelon(generarEchelon(24, 27));
-const c5EmeArray = filtrarPorEchelon(generarEchelon(28, 35));
-const t3EmeArray = filtrarPorEchelon(generarEchelon(36, 43));
+const primaire = palabrasDeEchelon(rango(1, 11));
+const ce2 = palabrasDeEchelon(rango(12, 15));
+const cm1 = palabrasDeEchelon(rango(16, 19));
+const cm2 = palabrasDeEchelon(rango(20, 23));
 
+function generarSecciones(arrayNiveles) {
+	const listSection = document.getElementById('word-list');
+	listSection.innerHTML = '';
+	
+	for (const section of arrayNiveles) {
+		const nuevaSeccion = document.createElement('section');
+		nuevaSeccion.classList = 'miNuevaSeccion';
+		
+		for (const palabra of section) {
+			const nuevoParrafo = document.createElement('li');
+			nuevoParrafo.textContent = palabra.nom;
+			nuevaSeccion.appendChild(nuevoParrafo);
+		}
+		
+		listSection.appendChild(nuevaSeccion);
+	}
+}
 
-console.log(dubois.length)
-console.log(cpArray, ce2Array, cm1Array, cm2Array, s6EmeArray, c5EmeArray, t3EmeArray)
-//filtrarConCriterio
-// separaArray
-
+// Llamada a la función con el array retornado por organizarNiveles(primaire)
 
 
 // barra de navegacion 
+
 document.addEventListener('DOMContentLoaded', function () {
-	const primaryButton = document.getElementById('primary-button');
-	const secondaryButton = document.getElementById('secondary-button');
+	const primaryButton = document.getElementById('primaire-button');
+	const secondaryButton = document.getElementById('secondaire-button');
 	const primaryMenu = document.getElementById('primary-menu');
 	const secondaryMenu = document.getElementById('secondary-menu');
 	const sectionTitle = document.getElementById('sub-section-title');
@@ -47,10 +57,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	// generando secciones
-	
 	for (var element of mainMenuLinks) {
 		element.addEventListener('click', function (event) {
-			sectionTitle.textContent = event.target.textContent
+			sectionTitle.textContent = event.target.textContent;
+			switch (event.target.id) {
+				case 'menu-item-cpce1':
+					generarSecciones(organizarNiveles(primaire))
+					break;
+				case 'menu-item-ce2':
+					generarSecciones(organizarNiveles(ce2))
+					break;
+			}
 		})
 	}
 });
+
