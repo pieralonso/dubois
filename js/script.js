@@ -81,20 +81,22 @@ var h3Elements = [];
 function generarSecciones(arrayNiveles) {
     listSection.innerHTML = '';
 
-    for (const section of arrayNiveles) {
+    arrayNiveles.forEach((section, index) => {
         const nuevaSeccion = createSectionElement();
         const container = createListContainerElement();
         const titulo = createTitleElement();
-
+        titulo.innerHTML = `Nivel ${index + 1}`
+        
         listSection.appendChild(nuevaSeccion);
         nuevaSeccion.appendChild(titulo);
         nuevaSeccion.appendChild(container);
-
-        for (const palabra of section) {
+        
+        section.forEach(palabra => {
             const nuevoParrafo = createListItemElement(palabra.nom);
             container.appendChild(nuevoParrafo);
-        }
-    }
+        });
+    });
+    
      h3Elements = Array.from(document.getElementsByClassName('toggle'));
 }
 
@@ -114,7 +116,6 @@ function createListContainerElement() {
 function createTitleElement() {
     const titulo = document.createElement('h3');
     titulo.classList = 'toggle';
-    titulo.innerHTML = 'Section';
     return titulo;
 }
 
