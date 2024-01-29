@@ -114,7 +114,7 @@ function createListContainerElement() {
 }
 
 function createTitleElement() {
-    const titulo = document.createElement('h3');
+    const titulo = document.createElement('h4');
     titulo.classList = 'toggle';
     return titulo;
 }
