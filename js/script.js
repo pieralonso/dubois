@@ -16,7 +16,6 @@ const sectionTitle = document.getElementById('sub-section-title');
 const navContainer = Array.from(document.getElementsByClassName('menu-container'));
 const mainMenuLinks = Array.from(document.getElementsByClassName('main__menu-link'));
 const listSection = document.getElementById('word-list');
-
 // Generar arrays a utilizar
 const arrayPrimaire = palabrasDeEchelon(rango(1, 11));
 const arrayCe2 = palabrasDeEchelon(rango(12, 15));
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Funciones de manejo de eventos
 const toggleMenu = (menu, container) => {
     menu.classList.toggle('hidden');
-    container.classList.toggle('hidden');
+    container.classList.toggle('hidden');    
 };
 
 const handleMenuLinkClick = (event) => {
@@ -73,6 +72,9 @@ const toggleVisibility = (event) => {
     const ulElement = event.target.nextElementSibling;
     ulElement.classList.toggle('hidden');
 };
+
+
+
 
 // Elementos compartidos
 var h3Elements = [];
