@@ -16,6 +16,9 @@ const sectionTitle = document.getElementById('sub-section-title');
 const navContainer = Array.from(document.getElementsByClassName('menu-container'));
 const mainMenuLinks = Array.from(document.getElementsByClassName('main__menu-link'));
 const listSection = document.getElementById('word-list');
+const mainSection = document.querySelector('#main-section')
+const welcomeSection = document.querySelector('#welcome-section')
+const titleLink = document.querySelector('#site-title-link')
 // Generar arrays a utilizar
 const arrayPrimaire = palabrasDeEchelon(rango(1, 11));
 const arrayCe2 = palabrasDeEchelon(rango(12, 15));
@@ -44,17 +47,21 @@ document.addEventListener('DOMContentLoaded', function () {
     mainMenuLinks.forEach(element => {
         element.addEventListener('click', handleMenuLinkClick);
     });
+    titleLink.addEventListener('click', backToMainPage);
 });
 
 // Funciones de manejo de eventos
 const toggleMenu = (menu, container) => {
     menu.classList.toggle('hidden');
-    container.classList.toggle('hidden');    
+    container.classList.toggle('hidden');
+    welcomeSection.classList.add('hidden');
 };
 
 const handleMenuLinkClick = (event) => {
+    console.log(event.target)
     sectionTitle.textContent = event.target.textContent;
     const nivelArray = menuIdToArrays[event.target.id];
+    mainSection.classList.remove('hidden');
     if (nivelArray) {
         const organizedLevels = organizarNiveles(nivelArray);
         generarSecciones(organizedLevels);
@@ -73,7 +80,13 @@ const toggleVisibility = (event) => {
     ulElement.classList.toggle('hidden');
 };
 
-
+const backToMainPage = () => {
+    mainSection.classList = "hidden"
+    welcomeSection.classList.remove("hidden")
+    primaryMenu.classList.add("hidden") ;
+    secondaryMenu.classList.add("hidden");
+    navContainer.forEach(element => element.classList.remove("hidden"));
+}
 
 
 // Elementos compartidos
@@ -105,7 +118,7 @@ function generarSecciones(arrayNiveles) {
 // Funciones auxiliares para la creación de elementos
 function createSectionElement() {
     const nuevaSeccion = document.createElement('section');
-    nuevaSeccion.classList = 'miNuevaSeccion';
+    nuevaSeccion.classList.add('miNuevaSeccion');
     return nuevaSeccion;
 }
 
@@ -117,13 +130,13 @@ function createListContainerElement() {
 
 function createTitleElement() {
     const titulo = document.createElement('h4');
-    titulo.classList = 'toggle';
+    titulo.classList.add('toggle');
     return titulo;
 }
 
 function createListItemElement(textContent) {
     const nuevoParrafo = document.createElement('li');
-    nuevoParrafo.classList = 'list-section-item';
+    nuevoParrafo.classList.add('list-section-item');
     nuevoParrafo.textContent = textContent;
     return nuevoParrafo;
 }
