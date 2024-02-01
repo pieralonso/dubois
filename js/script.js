@@ -58,7 +58,6 @@ const toggleMenu = (menu, container) => {
 };
 
 const handleMenuLinkClick = (event) => {
-    console.log(event.target)
     sectionTitle.textContent = event.target.textContent;
     const nivelArray = menuIdToArrays[event.target.id];
     mainSection.classList.remove('hidden');
@@ -73,7 +72,15 @@ const addToggleEventListeners = () => {
     h3Elements.forEach(element => {
         element.addEventListener('click', toggleVisibility);
     });
+    
+    divTitles.forEach((element) => {
+        element.addEventListener('click',toggleVisibility);
+    });
+    
 };
+
+
+
 
 const toggleVisibility = (event) => {
     const ulElement = event.target.nextElementSibling;
@@ -91,28 +98,51 @@ const backToMainPage = () => {
 
 // Elementos compartidos
 var h3Elements = [];
+var divTitles = [];
 
 // Función principal para generar secciones
 function generarSecciones(arrayNiveles) {
     listSection.innerHTML = '';
-
-    arrayNiveles.forEach((section, index) => {
-        const nuevaSeccion = createSectionElement();
-        const container = createListContainerElement();
-        const titulo = createTitleElement();
-        titulo.innerHTML = `Nivel ${index + 1}`
-        
-        listSection.appendChild(nuevaSeccion);
-        nuevaSeccion.appendChild(titulo);
-        nuevaSeccion.appendChild(container);
-        
-        section.forEach(palabra => {
-            const nuevoParrafo = createListItemElement(palabra.nom);
-            container.appendChild(nuevoParrafo);
-        });
-    });
     
-     h3Elements = Array.from(document.getElementsByClassName('toggle'));
+    // Divide el array en grupos de 10
+    const grupos = [];
+    while (arrayNiveles.length > 0) {
+        grupos.push(arrayNiveles.splice(0, 5));
+    }
+    
+    // Itera sobre cada grupo y crea un div para cada uno
+    grupos.forEach((grupo, index) => {
+        const nuevoDiv = document.createElement('div');
+        const divTitle = document.createElement('h3');
+        const sectionContainerChild = document.createElement("section");
+        sectionContainerChild.classList.add('hidden')
+        divTitle.classList.add('levels')
+        divTitle.innerHTML = `Nivel ${index + 1}`
+        nuevoDiv.appendChild(divTitle)
+        nuevoDiv.appendChild(sectionContainerChild)
+        nuevoDiv.classList.add('grupo-secciones');
+        
+        grupo.forEach((section, sectionIndex) => {
+            const nuevaSeccion = createSectionElement();
+            const container = createListContainerElement();
+            const titulo = createTitleElement();
+            titulo.innerHTML = `Section ${sectionIndex + 1}`;
+            
+            nuevaSeccion.appendChild(titulo);
+            nuevaSeccion.appendChild(container);
+            
+            section.forEach(palabra => {
+                const nuevoParrafo = createListItemElement(palabra.nom);
+                container.appendChild(nuevoParrafo);
+            });
+            
+            sectionContainerChild.appendChild(nuevaSeccion);
+        });
+        
+        listSection.appendChild(nuevoDiv);
+    });
+    h3Elements = Array.from(document.getElementsByClassName('toggle'));
+    divTitles = Array.from(document.getElementsByClassName('levels'));
 }
 
 // Funciones auxiliares para la creación de elementos
