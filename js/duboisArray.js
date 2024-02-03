@@ -5,6 +5,5 @@ const dubois = duboisArray.map(elemento => {
 	return { nom, echelon: parseInt(echelon), type };
 });
 
-const duboisData = dubois.sort((a, b) => a.echelon - b.echelon);
+export const duboisData = dubois.sort((a, b) => a.echelon - b.echelon);
 
-export { duboisData };

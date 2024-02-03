@@ -1,0 +1,11 @@
+export const primaryButton = document.getElementById('primaire-button');
+export const secondaryButton = document.getElementById('secondaire-button');
+export const primaryMenu = document.getElementById('primary-menu');
+export const secondaryMenu = document.getElementById('secondary-menu');
+export const sectionTitle = document.getElementById('sub-section-title');
+export const navContainer = Array.from(document.getElementsByClassName('menu-container'));
+export const mainMenuLinks = Array.from(document.getElementsByClassName('main__menu-link'));
+export const listSection = document.getElementById('word-list');
+export const mainSection = document.querySelector('#main-section')
+export const welcomeSection = document.querySelector('#welcome-section')
+export const titleLink = document.querySelector('#site-title-link')
