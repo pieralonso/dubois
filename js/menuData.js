@@ -1,4 +1,4 @@
-import { palabrasDeEchelon, rango } from './utils.js'
+import { palabrasDeRango, rango } from './utils.js'
 
 const arrayPrimaire = palabrasDeEchelon(rango(1, 11));
 const arrayCe2 = palabrasDeEchelon(rango(12, 15));
