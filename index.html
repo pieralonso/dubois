@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/styles.css">
+        <script src="./js/main.js" type="module" defer></script>
+        <script src="./js/utils.js" type="module"></script>
         <title>Dubois Buyse</title>
     </head>
     <body>
@@ -21,7 +23,7 @@
                     </section>
                     <section class="intro-start">
                         <h2 class="start-heading">Lorem ipsum dolor sit amet consectetur. Condimentum curabitur tempus </h2>
-                        <button class="start-button">COMMENCER</button>
+                        <button class="start-button" id="startButton">COMMENCER</button>
                     </section>
                 </section>
             </section>
@@ -31,19 +33,19 @@
                     <header class="menu-header">
                         <nav class="header-nav">
                             <ul class="nav-etapes">
-                                <li class="etapes-item">PRIMAIRE</li>
+                                <li class="etapes-item clicked">PRIMAIRE</li>
                                 <li class="etapes-item">SECONDAIRE</li>
                             </ul>
                             <ul class="nav-grades">
-                                <li class="grades-item">CP</li>
-                                <li class="grades-item">CE2</li>
-                                <li class="grades-item">CM1</li>
-                                <li class="grades-item">CM2</li>
+                                <li class="grades-item" id="cp">CP</li>
+                                <li class="grades-item" id="ce2">CE2</li>
+                                <li class="grades-item" id="cm1">CM1</li>
+                                <li class="grades-item" id="cm2">CM2</li>
                             </ul>
-                            <ul class="nav-grades">
-                                <li class="grades-item">6EME</li>
-                                <li class="grades-item">5-4EME</li>
-                                <li class="grades-item">3EME & LYCE</li>
+                            <ul class="nav-grades hidden">
+                                <li class="grades-item" id="6eme">6EME</li>
+                                <li class="grades-item" id="5eme">5-4EME</li>
+                                <li class="grades-item" id="lyce">3EME & LYCE</li>
                             </ul>
                         </nav>
                     </header>
@@ -67,13 +69,7 @@
                     <header class="content-header">
                         <h3 class="header-heading"> seccion - nivel - subnivel</h3>
                     </header>
-                    <nav class="content-nav">
-                        <li class="nav-item">opciones</li>
-                        <li class="nav-item">opciones</li>
-                        <li class="nav-item">opciones</li>
-                        <li class="nav-item">opciones</li>
-                        <li class="nav-item">opciones</li>
-                        <li class="nav-item">opciones</li>
+                    <nav class="content-nav" id="contentNav">
                         <li class="nav-item">opciones</li>
                         <li class="nav-item">opciones</li>
                         <li class="nav-item">opciones</li>
@@ -82,27 +78,8 @@
 <!--                    mas opciones -->
                     </nav>
                     <section class="content-section">
-                        <ul class="section-list">
-                            <li class="list-item">palabrassd</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabrasd</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabrasd</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabraaeze</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
-                            <li class="list-item">palabra</li>
+                        <ul class="section-list" id="sectionList">
+                            
                         </ul>
                     </section>
                 </section>
