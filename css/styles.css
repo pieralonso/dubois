@@ -300,6 +300,10 @@ body, .container {
 	border-bottom: 1px solid white;
 }
 
+.selected {
+	background-color: gray;
+}
+
 .hidden {
 	display:none;
 }
