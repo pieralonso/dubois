@@ -7,32 +7,29 @@ const palabrasEchelon = filtrarPor('echelon');
 const startButton = document.getElementById("startButton");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [backToHome, backToNav] = Array.from(document.getElementsByClassName('main-icon'));
-const sections = Array.from(document.getElementsByClassName('nav-grades'))
+const sections = Array.from(document.getElementsByClassName('nav-grades'));
 const etapesItems = Array.from(document.getElementsByClassName('etapes-item'));
 const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
-const sectionList = document.getElementById('sectionList')
+const sectionList = document.getElementById('sectionList');
+const contentNav = document.getElementById('contentNav');
+const navItems = Array.from(document.getElementsByClassName('nav-item'));
+const navOptions = Array.from(document.getElementsByClassName('nav-item'));
+
+
 
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
-    'cp': [1, 11],
-    'ce2': [12, 15],
-    'cm1': [16, 19],
-    'cm2': [20, 23],
-    '6eme': [24, 27],
-    '5eme': [28, 35],
-    'lyce': [36, 43]
+    'a1': [1, 15],
+    'a2': [16, 19],
+    'b1': [20, 23],
+    'b2': [24, 43],
 };
 
 
 function toggleElements(elementToShow, elementToHide) {
     elementToShow.classList.toggle("hidden");
     elementToHide.classList.toggle("hidden");
-}
-
-function toggleNavSection(navToShow, navToHide) {
-    navToShow.style.display = "flex"
-    navToHide.style.display = "none"
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -59,9 +56,19 @@ function distribuirPalabrasEnArrays(arrayPalabras) {
     }, {});
 }
 
-// Ejemplo de uso
-const arraysDistribuidos = distribuirPalabrasEnArrays(palabrasEchelon(rango(1, 11)));
-console.log(distribuirPalabrasEnArrays(palabrasEchelon(rango(36, 43))));
+function crearListaDeRango(a, b, nivel, section) {
+    sectionList.innerHTML = ''
+    distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[`${nivel}`][`${section}`].forEach(function (element) {
+        const listItem = document.createElement('li')
+        listItem.classList.add("list-item");
+        listItem.innerHTML = element.nom;
+        sectionList.appendChild(listItem);
+    })
+}
+
+
+console.log(Object.entries(distribuirPalabrasEnArrays(palabrasEchelon(rango(24, 43)))))
+
 
 document.addEventListener('DOMContentLoaded', function() {
     toggleElements(mainMenu, mainContent);
@@ -74,24 +81,17 @@ document.addEventListener('DOMContentLoaded', function() {
         element.addEventListener('click', () => toggleElements(mainContent, mainMenu))
     );
     
+    
     gradesLinks.forEach((element, index) => {
         element.addEventListener('click', function () {
-            gradesLinks.forEach(item => item.classList.remove('selected'));
-            element.classList.add('selected');
-        });
-    });
-    
-    etapesItems.forEach((element, index) => {
-        element.addEventListener('click', function () {
-            toggleNavSection(sections[index], sections[1 - index]);
-            etapesItems.forEach(item => item.classList.remove('clicked'));
+            gradesLinks.forEach(item => item.classList.remove('clicked'));
             element.classList.add('clicked');
         });
     });
     
     gradesLinks.forEach(function (element) {
         nivelesLink.forEach(function (elemento, posicion) {
-            elemento.id = `cpNivel${posicion + 1}`
+            elemento.id = `a1Nivel${posicion + 1}`
         })
         
         element.addEventListener('click', function () {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     nivelesLink.forEach(function (element, index) {
         element.addEventListener('click', function () {
-            const nivel = index + 1; // Nivel es el índice más uno
+            const nivel = index + 1; 
             
             // Iterar sobre el objeto idToRango
             Object.entries(idToRango).forEach(([cadena, rango]) => {
@@ -111,21 +111,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     crearListaDeRango(rango[0], rango[1], `nivel${nivel}`, 'section1');
                 }
             });
+            navOptions.forEach(function(elemento, indice) {
+                elemento.addEventListener('click', function () {
+                    const section = indice + 1;
+                    Object.entries(idToRango).forEach(([cadena, rango]) => {
+                        if (element.id.includes(cadena)) {
+                            crearListaDeRango(rango[0], rango[1], `nivel${nivel}`, `section${section}`);
+                        }
+                    });
+                }, )
+            })
         });
     });
-
-
-    
-    
 });
-
-function crearListaDeRango(a, b, nivel, section) {
-    sectionList.innerHTML = ''
-    distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[`${nivel}`][`${section}`].forEach(function (element) {
-        const listItem = document.createElement('li')
-        listItem.classList.add("list-item");
-        listItem.innerHTML = element.nom;
-        sectionList.appendChild(listItem);
-    })
-}
 
