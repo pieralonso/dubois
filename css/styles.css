@@ -80,17 +80,21 @@ body, .container {
 
 .header-h1 {
 	font-style:normal;
-	font-weight: 100;
-	font-size: 35px;
+	font-weight: 500;
+	line-height: 98%;
+	font-size: 32px;
 	line-height: 36px;
 }
 
 .start-heading {
+	flex: none;
+	order: 0;
+	align-self: stretch;
 	font-style: normal;
-	font-weight: 200;
-	font-size: 30px;
-	line-height: 36px;
-	color: rgba(0, 0, 0, 0.88);
+	font-weight: 500;
+	font-size: 35px;
+	line-height: 112%;
+	color: #002654;
 }
 
 .start-button {
@@ -113,9 +117,9 @@ body, .container {
 	padding: 10px 0;
 	margin: 0;
 	font-style: normal;
-	font-weight: 100;
+	font-weight: lighter;
 	font-size: 16px;
-	line-height: 125%;
+	line-height: 16px;
 	color: #FAFAFA;	
 }
 
