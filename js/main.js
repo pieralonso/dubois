@@ -13,7 +13,6 @@ const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
 const sectionList = document.getElementById('sectionList');
 const contentNav = document.getElementById('contentNav');
-const navItems = Array.from(document.getElementsByClassName('nav-item'));
 const navOptions = Array.from(document.getElementsByClassName('nav-item'));
 
 
@@ -123,5 +122,13 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         });
     });
+    
+    navOptions.forEach(function (element) {
+        element.addEventListener('click', function () {
+            navOptions.forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+        })
+        
+    })
 });
 
