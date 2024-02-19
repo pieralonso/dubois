@@ -14,8 +14,7 @@ const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
 const sectionList = document.getElementById('sectionList');
 const contentNav = document.getElementById('contentNav');
 const navOptions = Array.from(document.getElementsByClassName('nav-item'));
-
-
+const contentHeading = document.getElementById('contentSectionHeading');
 
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
@@ -24,6 +23,17 @@ const idToRango = {
     'b1': [20, 23],
     'b2': [24, 43],
 };
+
+// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+function selectedSection() {
+    const selectedElement = gradesLinks.find(element => element.className.includes("clicked"));
+    return selectedElement ? selectedElement.innerHTML : null;
+}
 
 
 function toggleElements(elementToShow, elementToHide) {
@@ -120,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }, )
             })
+            contentHeading.innerHTML = `${selectedSection()} - ${element.innerHTML}`
         });
     });
     
@@ -131,4 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
     })
 });
+
+
 
