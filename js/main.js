@@ -5,9 +5,10 @@ const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const filtrarPor = (propiedad) => (array) => duboisData.filter(elemento => array.some(arrayItem => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor('echelon');
 const startButton = document.getElementById("startButton");
-const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
-const [backToHome, backToNav] = Array.from(document.getElementsByClassName('main-icon'));
+const [home, start, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
+const [back, backToHome, backToNav] = Array.from(document.getElementsByClassName('main-icon'));
 const sections = Array.from(document.getElementsByClassName('nav-grades'));
+const itemsStart = Array.from(document.getElementsByClassName('start-nav-item'));
 const etapesItems = Array.from(document.getElementsByClassName('etapes-item'));
 const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
@@ -15,6 +16,8 @@ const sectionList = document.getElementById('sectionList');
 const contentNav = document.getElementById('contentNav');
 const navOptions = Array.from(document.getElementsByClassName('nav-item'));
 const contentHeading = document.getElementById('contentSectionHeading');
+const mainContentP = document.getElementById('mainContentP');
+const mainContentDiv = document.getElementById('mainContentPopUp');
 
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
@@ -35,10 +38,24 @@ function selectedSection() {
     return selectedElement ? selectedElement.innerHTML : null;
 }
 
+function toggleInfo() {
+    Array.from(document.getElementsByClassName('list-item')).forEach(function (item) {
+        item.addEventListener('click', function () {
+            mainContentP.innerHTML = item.innerHTML;
+            mainContentDiv.style.display = 'flex';
+            Array.from(document.getElementsByClassName('item-type')).forEach(function (item) {
+                item.style.display = 'block'
+            })
+        });
+    })
+}
 
-function toggleElements(elementToShow, elementToHide) {
-    elementToShow.classList.toggle("hidden");
-    elementToHide.classList.toggle("hidden");
+function toggleElements(elementToShow) {
+    Array.from(document.getElementsByClassName("section")).forEach(function (element) {
+        element.classList.add('hidden');
+    })
+    elementToShow.classList.remove("hidden");
+    
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -65,14 +82,31 @@ function distribuirPalabrasEnArrays(arrayPalabras) {
     }, {});
 }
 
+function loader(element, seconds) {
+    var time = seconds * 1000;
+    element.addEventListener('click', function () {
+        document.getElementById("loadingScreen").style.display = "flex";
+        setTimeout(function() {
+            document.getElementById("loadingScreen").style.display = "none";
+        }, time);
+    });
+}
+
 function crearListaDeRango(a, b, nivel, section) {
     sectionList.innerHTML = ''
-    distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[`${nivel}`][`${section}`].forEach(function (element) {
-        const listItem = document.createElement('li')
+    const arrayDePalabras = distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[`${nivel}`][`${section}`]
+    arrayDePalabras.forEach(function (element) {
+        const listItem = document.createElement('li');
+        const spanType = document.createElement('span');
         listItem.classList.add("list-item");
+        spanType.classList.add("item-type");
         listItem.innerHTML = element.nom;
+        spanType.innerHTML = element.type;
         sectionList.appendChild(listItem);
+        listItem.appendChild(spanType)
     })
+    
+    return arrayDePalabras
 }
 
 
@@ -80,15 +114,44 @@ console.log(Object.entries(distribuirPalabrasEnArrays(palabrasEchelon(rango(24, 
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    toggleElements(mainMenu, mainContent);
-
-    startButton.addEventListener('click', () => toggleElements(mainMenu, home));
-    backToHome.addEventListener('click', () => toggleElements(mainMenu, home));
-    backToNav.addEventListener('click', () => toggleElements(mainContent, mainMenu));
+    
+    mainContentDiv.addEventListener('click', function (event) {
+        if(event.target.id !== mainContentP.id) {
+            mainContentDiv.style.display = 'none'
+            Array.from(document.getElementsByClassName('item-type')).forEach(function (item) {
+                item.style.display = 'none'
+            })
+        }
+    },)
+    
+    toggleElements(home);
+    
+    gradesLinks.forEach(element => loader(element, 1));
+    
+    nivelesLink.forEach(element => loader(element, 3));
+    
+    loader(startButton, 1.5);
+    
+    
+    startButton.addEventListener('click', () => toggleElements(start));
+    backToHome.addEventListener('click', () => toggleElements(home));
+    backToNav.addEventListener('click', () => toggleElements(mainMenu));
+    back.addEventListener('click', () => toggleElements(home))
 
     Array.from(document.getElementsByClassName('niveaux-item')).forEach(element =>
-        element.addEventListener('click', () => toggleElements(mainContent, mainMenu))
+        element.addEventListener('click', () => toggleElements(mainContent))
     );
+    
+    itemsStart.forEach(function (element, index) {
+        element.addEventListener('click', function () {
+            toggleElements(mainMenu);
+            gradesLinks.forEach(item => item.classList.remove('clicked'));
+            gradesLinks[index].classList.add('clicked');
+            nivelesLink.forEach(function(elemento, posicion) {
+                elemento.id = `${gradesLinks[index].id}Nivel${posicion + 1}`
+            })
+        })
+    })
     
     
     gradesLinks.forEach((element, index) => {
@@ -125,12 +188,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     const section = indice + 1;
                     Object.entries(idToRango).forEach(([cadena, rango]) => {
                         if (element.id.includes(cadena)) {
-                            crearListaDeRango(rango[0], rango[1], `nivel${nivel}`, `section${section}`);
+                            crearListaDeRango(rango[0], rango[1], `nivel${nivel}`, `section${section}`)
                         }
+                        toggleInfo()
                     });
                 }, )
+                toggleInfo()
             })
             contentHeading.innerHTML = `${selectedSection()} - ${element.innerHTML}`
+            navOptions.forEach(item => item.classList.remove('selected'));
+            navOptions[0].classList.add('selected');
         });
     });
     
