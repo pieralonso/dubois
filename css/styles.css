@@ -400,6 +400,11 @@ body, .container {
 	
 }
 
+.icon-svg {
+	width: 3.5vh;
+	height: 3.5vh;
+}
+
 .clicked {
 	color: #FF8738;
 	font-size: 6vh;
@@ -413,6 +418,23 @@ body, .container {
 
 .hidden {
 	display:none;
+}
+
+@media screen and (min-width: 600px ) {
+	.header-h1 {
+		font-size: 7vh;
+	}
+
+	.start-nav-item {
+		font-size: 5.5vh;
+	}
+	.start-nav-item:hover {
+		font-size: 7.6vh;
+	}
+	.icon-svg {
+		width: 4vh;
+		height: 4vh;
+	}
 }
 
 

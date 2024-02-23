@@ -1,19 +1,15 @@
 import { duboisData } from './duboisArray.js';
 
-const arraysVacios = Object.fromEntries(Array.from({ length: 10 }, (_, i) => [`array${i + 1}`, []]));
 const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const filtrarPor = (propiedad) => (array) => duboisData.filter(elemento => array.some(arrayItem => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor('echelon');
 const startButton = document.getElementById("startButton");
 const [home, start, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back, backToHome, backToNav] = Array.from(document.getElementsByClassName('main-icon'));
-const sections = Array.from(document.getElementsByClassName('nav-grades'));
 const itemsStart = Array.from(document.getElementsByClassName('start-nav-item'));
-const etapesItems = Array.from(document.getElementsByClassName('etapes-item'));
 const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
 const sectionList = document.getElementById('sectionList');
-const contentNav = document.getElementById('contentNav');
 const navOptions = Array.from(document.getElementsByClassName('nav-item'));
 const contentHeading = document.getElementById('contentSectionHeading');
 const mainContentP = document.getElementById('mainContentP');
@@ -27,9 +23,8 @@ const idToRango = {
     'b2': [24, 43],
 };
 
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+// obteniendo la altura real de la pantalla
 let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 
