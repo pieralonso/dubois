@@ -126,11 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     toggleElements(home);
     
-    gradesLinks.forEach(element => loader(element, 1));
+    gradesLinks.forEach(element => loader(element, 0.3));
     
-    nivelesLink.forEach(element => loader(element, 3));
+    nivelesLink.forEach(element => loader(element, 1.6));
     
-    loader(startButton, 1.5);
+    loader(startButton, 1.2);
     
     
     startButton.addEventListener('click', () => toggleElements(start));

@@ -389,12 +389,12 @@ body, .container {
 }
 
 .main-content-p {
-	font-size: 5vh;
+	font-size: 6vh;
 	color: white;
 }
 .item-type {
 	display: none;
-	font-size: 2vh;
+	font-size: 3vh;
 	font-weight: 400;
 	color: #FF8738;
 	
