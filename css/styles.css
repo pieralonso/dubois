@@ -182,6 +182,7 @@ body, .container {
 	/* Inside auto layout */
 	flex: none;
 	flex-grow: 0;
+	justify-content: center;
 	
 }
 
@@ -199,9 +200,10 @@ body, .container {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: flex-start;
 	padding: 0;
+	gap:4vh;
 }
 
 .grades-item {
