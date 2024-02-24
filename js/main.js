@@ -4,8 +4,8 @@ const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const filtrarPor = (propiedad) => (array) => duboisData.filter(elemento => array.some(arrayItem => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor('echelon');
 const startButton = document.getElementById("startButton");
-const [home, start, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
-const [back, backToHome, backToNav] = Array.from(document.getElementsByClassName('main-icon'));
+const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
+const [back, backToNiveles] = Array.from(document.getElementsByClassName('main-icon'));
 const itemsStart = Array.from(document.getElementsByClassName('start-nav-item'));
 const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
@@ -121,17 +121,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     toggleElements(home);
     
-    gradesLinks.forEach(element => loader(element, 0.3));
-    
-    nivelesLink.forEach(element => loader(element, 1.6));
+    nivelesLink.forEach(element => loader(element, 1.2));
     
     loader(startButton, 1.2);
     
     
-    startButton.addEventListener('click', () => toggleElements(start));
-    backToHome.addEventListener('click', () => toggleElements(home));
-    backToNav.addEventListener('click', () => toggleElements(mainMenu));
-    back.addEventListener('click', () => toggleElements(home))
+    startButton.addEventListener('click', () => toggleElements(mainMenu));
+    backToNiveles.addEventListener('click', () => toggleElements(mainMenu));
+    back.addEventListener('click', function () {
+        if (back.id === 'backToView') {
+            gradesLinks.forEach(item => item.classList.remove('clicked'));
+            gradesLinks.forEach(item => item.classList.remove("hidden"));
+            document.getElementById('navNiveaux').style.display = "none";
+            document.getElementById('menuHeader').style.height = '100%';
+            document.getElementById('startP').style.display = "flex";
+            back.id = 'backToHome'
+        } else if (back.id === 'backToHome') {
+            toggleElements(home)
+        }
+
+    })
+    
 
     Array.from(document.getElementsByClassName('niveaux-item')).forEach(element =>
         element.addEventListener('click', () => toggleElements(mainContent))
@@ -150,10 +160,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     gradesLinks.forEach((element, index) => {
-        element.addEventListener('click', function () {
-            gradesLinks.forEach(item => item.classList.remove('clicked'));
-            element.classList.add('clicked');
+        element.addEventListener('click', function (event) {
+            if (!element.classList.contains('clicked')) {
+                back.id = 'backToView'
+                gradesLinks.forEach(item => item.classList.remove('clicked'));
+                element.classList.add('clicked');
+                gradesLinks.forEach(item => item.classList.add("hidden"));
+                element.classList.remove('hidden')
+                document.getElementById('navNiveaux').style.display = "flex";
+                document.getElementById('menuHeader').style.height = '10%';
+                document.getElementById('startP').style.display = "none";
+            } else if (element.classList.contains('clicked')) {
+                back.id = 'backToHome'
+                gradesLinks.forEach(item => item.classList.remove('clicked'));
+                gradesLinks.forEach(item => item.classList.remove("hidden"));
+                document.getElementById('navNiveaux').style.display = "none";
+                document.getElementById('menuHeader').style.height = '100%';
+                document.getElementById('startP').style.display = "flex";
+            }
         });
+        
     });
     
     gradesLinks.forEach(function (element) {

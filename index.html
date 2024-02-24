@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
         <script src="./js/main.js" type="module" defer></script>
-        <title>Dubois Buyse</title>
+        <title>Dubois Buyse copy</title>
     </head>
     <body>
         <div class="loader" id="loadingScreen">
@@ -29,40 +29,23 @@
                 </section>
             </section>
             <main class="main">
-                <section class="section start">
-                    <header class="start-header">
-                        <span class="main-icon"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
-                        </span>
-                    </header>
-                    <div class="start-content">
-                        <p class="start-p">CHOISIR UN NIVEAU D’APPRENTISSAGE</p>
-                        <nav class="start-nav">
-                            <ul class="start-nav-grades">
-                                <li class="start-nav-item" id="a1-start">A1</li>
-                                <li class="start-nav-item" id="a2-start">A2</li>
-                                <li class="start-nav-item" id="b1-start">B1</li>
-                                <li class="start-nav-item" id="b2-start">B2</li>
-                            </ul>
-                        </nav>
-                    </div>
-                </section>
                 <section class="section main-menu">
-                    <span class="main-icon"> 
+                    <span class="main-icon" id="backToHome"> 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg"  viewBox="0 -960 960 960" ><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
                     </span>
-                    <header class="menu-header">
+                    <p class="start-p" id="startP">CHOISIR UN NIVEAU D’APPRENTISSAGE</p>
+                    <header class="menu-header" id="menuHeader">
                         <nav class="header-nav">
                             <ul class="nav-grades">
-                                <li class="grades-item clicked" id="a1">A1</li>
-                                <li class="grades-item" id="a2">A2</li>
+                                <li class="grades-item" id="a1">A1</li>
+                                <li class="grades-item even" id="a2">A2</li>
                                 <li class="grades-item" id="b1">B1</li>
-                                <li class="grades-item" id="b2">B2</li>
+                                <li class="grades-item even" id="b2">B2</li>
                             </ul>
                         </nav>
                     </header>
                     <nav class="menu-nav">
-                        <ol class="nav-niveaux">
+                        <ol class="nav-niveaux" id="navNiveaux">
                             <li class="niveaux-item">NIVEL 1</li>
                             <li class="niveaux-item">NIVEL 2</li>
                             <li class="niveaux-item">NIVEL 3</li>
