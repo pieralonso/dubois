@@ -449,6 +449,19 @@ body, .container {
 		width: 4vh;
 		height: 4vh;
 	}
+
+	.nav-grades {
+		align-items: center;
+	}
+
+	.grades-item {
+		border-radius: 30px 30px 30px 30px;
+		font-weight: bold;
+	}
+	.section-list {
+		padding: 0 10vw;
+	}
+
 }
 
 
