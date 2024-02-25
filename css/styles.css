@@ -169,22 +169,20 @@ body, .container {
 }
 
 .start-p {
-	
-	font-style: normal;
-	font-weight: 800;
-	font-size: 4.5vh;
-	line-height: 167%;
-	text-align: center;
-	width: 100%;
-	color: #ABC1DA;
-	margin: 0;
-	padding: 20px 0;
-	/* Inside auto layout */
-	flex: none;
-	flex-grow: 0;
-	justify-content: center;
-	
-}
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3.5vh;
+    line-height: 167%;
+    text-align: center;
+    width: 100%;
+    color: #ABC1DA;
+    margin: 0;
+    padding: 20px 10px 0 10px;
+    flex: none;
+    flex-grow: 0;
+    justify-content: center;
+}	
+
 
 .start-header {
 	width: 100vw;
