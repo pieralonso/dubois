@@ -3,5 +3,6 @@
 *.tmp
 app.js
 .DS_store
+prueba.js
 
 
