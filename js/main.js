@@ -23,11 +23,6 @@ const idToRango = {
     'b2': [24, 43],
 };
 
-// obteniendo la altura real de la pantalla
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-
 function selectedSection() {
     const selectedElement = gradesLinks.find(element => element.className.includes("clicked"));
     return selectedElement ? selectedElement.innerHTML : null;

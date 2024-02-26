@@ -12,7 +12,7 @@
     </head>
     <body>
         <main class="main container">
-            <section class="section home">
+            <section class="section home" id="home">
                 <header class="home-header">
                     <h1 class="header-h1">VOCABULAIRE ORTOGRAPHIQUE DUBOIS - BUYSE</h1>
                     <!--            icono info -->
@@ -21,45 +21,45 @@
                     <p class="info-paragraph"><span class="info-paragraph-highlight">4000 mots</span> d'usage courant supposés
                         être connus de tout adulte francophone.
                         répartis sur  degrés de difficulté</p>
-                    <button class="start-button loading" id="startButton">commencer</button>
+                    <a href="#mainMenu"><button class="start-button loading" id="startButton">commencer</button></a>
                 </section>
             </section>
-            <section class="section main-menu">
+            <section class="section main-menu" id="mainMenu">
                 <span class="main-icon" id="backToHome"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg"  viewBox="0 -960 960 960" ><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+                    <a href="#home"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg"  viewBox="0 -960 960 960" ><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a>
                 </span>
                 <p class="start-p" id="startP">CHOISIR UN NIVEAU D’APPRENTISSAGE</p>
                 <header class="menu-header" id="menuHeader">
                     <nav class="header-nav">
                         <ul class="nav-grades">
-                            <li class="grades-item" id="a1"><a href="#navNiveaux">A1</a></li>
-                            <li class="grades-item even" id="a2"><a href="#navNiveaux">A2</a></li>
-                            <li class="grades-item" id="b1"><a href="#navNiveaux">B1</a></li>
-                            <li class="grades-item even" id="b2"><a href="#navNiveaux">B2</a></li>
+                            <li class="grades-item" id="a1"><a href="#mainMenu">A1</a></li>
+                            <li class="grades-item even" id="a2"><a href="#mainMenu">A2</a></li>
+                            <li class="grades-item" id="b1"><a href="#mainMenu">B1</a></li>
+                            <li class="grades-item even" id="b2"><a href="#mainMenu">B2</a></li>
                         </ul>
                     </nav>
                 </header>
                 <nav class="menu-nav">
                     <ol class="nav-niveaux" id="navNiveaux">
-                        <li class="niveaux-item">NIVEAU 1</li>
-                        <li class="niveaux-item">NIVEAU 2</li>
-                        <li class="niveaux-item">NIVEAU 3</li>
-                        <li class="niveaux-item">NIVEAU 4</li>
-                        <li class="niveaux-item">NIVEAU 5</li>
-                        <li class="niveaux-item">NIVEAU 6</li>
-                        <li class="niveaux-item">NIVEAU 7</li>
-                        <li class="niveaux-item">NIVEAU 8</li>
-                        <li class="niveaux-item">NIVEAU 9</li>
-                        <li class="niveaux-item">NIVEAU 10</li>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 1</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 2</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 3</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 4</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 5</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 6</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 7</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 8</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 9</li></a>
+                        <a href="#mainContent"><li class="niveaux-item">NIVEAU 10</li></a>
                     </ol>
                 </nav>
             </section>
-            <section class="section main-content">
+            <section class="section main-content" id="mainContent">
                 <div class="main-content-popup" id="mainContentPopUp">
                     <p class="main-content-p" id="mainContentP"></p>
                 </div>
                 <span class="main-icon"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+                    <a href="#mainMenu"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a>
                 </span>
                 <header class="content-header">
                     <h3 class="header-heading" id="contentSectionHeading"> seccion - nivel - subnivel</h3>
@@ -70,11 +70,11 @@
                     </ul>
                 </section>
                 <nav class="content-nav" id="contentNav">
-                    <li class="nav-item selected"><a href="#sectionList">1</a></li>
-                    <li class="nav-item"><a href="#sectionList">2</a></li>
-                    <li class="nav-item"><a href="#sectionList">3</a></li>
-                    <li class="nav-item"><a href="#sectionList">4</a></li>
-                    <li class="nav-item"><a href="#sectionList">5</a></li>
+                    <li class="nav-item selected"><a href="#mainContent">1</a></li>
+                    <li class="nav-item"><a href="#mainContent">2</a></li>
+                    <li class="nav-item"><a href="#mainContent">3</a></li>
+                    <li class="nav-item"><a href="#mainContent">4</a></li>
+                    <li class="nav-item"><a href="#mainContent">5</a></li>
                 </nav>
             </section>
         </main>
