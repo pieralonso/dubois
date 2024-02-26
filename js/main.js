@@ -36,6 +36,8 @@ function selectedSection() {
 function toggleInfo() {
     Array.from(document.getElementsByClassName('list-item')).forEach(function (item) {
         item.addEventListener('click', function () {
+            mainContentP.innerHTML = "";
+            fadeIn(mainContentP, 2)
             mainContentP.innerHTML = item.innerHTML;
             mainContentDiv.style.display = 'flex';
             Array.from(document.getElementsByClassName('item-type')).forEach(function (item) {
@@ -45,12 +47,19 @@ function toggleInfo() {
     })
 }
 
+
+function fadeIn(htmlElement, n) {
+    htmlElement.style.animation = `fadeIn ${n}s ease`;
+}
+function fadeOut(htmlElement, n) {
+     htmlElement.style.animation = `fadeOut ${n}s ease`;
+}
 function toggleElements(elementToShow) {
     Array.from(document.getElementsByClassName("section")).forEach(function (element) {
         element.classList.add('hidden');
     })
     elementToShow.classList.remove("hidden");
-    
+    fadeIn(elementToShow, 1.5)
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -77,15 +86,7 @@ function distribuirPalabrasEnArrays(arrayPalabras) {
     }, {});
 }
 
-function loader(element, seconds) {
-    var time = seconds * 1000;
-    element.addEventListener('click', function () {
-        document.getElementById("loadingScreen").style.display = "flex";
-        setTimeout(function() {
-            document.getElementById("loadingScreen").style.display = "none";
-        }, time);
-    });
-}
+
 
 function crearListaDeRango(a, b, nivel, section) {
     sectionList.innerHTML = ''
@@ -107,6 +108,10 @@ function crearListaDeRango(a, b, nivel, section) {
 
 console.log(Object.entries(distribuirPalabrasEnArrays(palabrasEchelon(rango(24, 43)))))
 
+window.onload = function() {
+    // Limpiar el hash al cargar la página
+    history.replaceState({}, document.title, ".");
+};
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -118,15 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }
     },)
-    
     toggleElements(home);
-    
-    nivelesLink.forEach(element => loader(element, 1.2));
-    
-    loader(startButton, 1.2);
-    
-    
     startButton.addEventListener('click', () => toggleElements(mainMenu));
+    startButton.addEventListener('click', () => fadeOut(home, 2));
+
     backToNiveles.addEventListener('click', () => toggleElements(mainMenu));
     back.addEventListener('click', function () {
         if (back.id === 'backToView') {
@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('menuHeader').style.height = '10%';
                 document.getElementById('startP').style.display = "none";
             } else if (element.classList.contains('clicked')) {
+                
                 back.id = 'backToHome'
                 gradesLinks.forEach(item => item.classList.remove('clicked'));
                 gradesLinks.forEach(item => item.classList.remove("hidden"));
@@ -178,6 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('menuHeader').style.height = '100%';
                 document.getElementById('startP').style.display = "flex";
             }
+            
+            fadeIn(document.getElementById('navNiveaux'), 1.5)
+            
         });
         
     });
@@ -213,6 +217,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         toggleInfo()
                     });
+                    Array.from(document.getElementsByClassName('list-item')).forEach(function (b) {
+                        fadeIn(b, 1.5)
+                    })
                 }, )
                 toggleInfo()
             })

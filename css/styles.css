@@ -1,5 +1,5 @@
 /*reglas generales de reseteo */
-body, h1, h2,h3, ul, ol, nav {
+body, h1, h2,h3, ul, ol, nav, a {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -15,6 +15,21 @@ ol, ul {
 * {
 	box-sizing: border-box;
 }
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+
+a:hover {
+	color: inherit;
+	text-decoration: none; 
+}
+
+a:visited {
+	color: inherit; 
+	text-decoration: none; }
 
 button {
 	border-top-width: 0;
@@ -39,8 +54,9 @@ body, .container {
 }
 
 .section {
-	height: 100vh ; /* Fallback for browsers that do not support Custom Properties */
+	height: 100vh; /* Fallback for browsers that do not support Custom Properties */
 	height: calc(var(--vh, 1vh) * 100);;
+/*	min-height: -webkit-fill-available;*/
 }
 
 .header-h1{
@@ -58,7 +74,13 @@ body, .container {
 	align-items: center;
 	padding: 52px 31px;
 	gap: 29px;
+	opacity: 1;
+	animation: fadeIn 3s ease;
 }
+
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;}	}
+@keyframes fadeOut { from {opacity: 1;} to {opacity: 0;}	}
+
 
 .home-intro {
 	display: flex;
@@ -123,7 +145,6 @@ body, .container {
 	justify-content: space-between;
 	align-items: flex-start;
 }
-
 
 .main-icon {
 	display: flex;
@@ -214,7 +235,15 @@ body, .container {
 	padding: 20px 30px;
 	background: #2B4B71;
 	border-radius: 0px 30px 30px 0px;
+	transition: width 1s ease;
 }
+
+.grades-item:hover {
+	width: 65vw;
+/*	animation: tamano 1s ease;*/
+}
+
+/*@keyframes tamano { from { width: 50vw; } to { width: 65vw; } }; */
 
 .menu-nav {
 	display: flex;
@@ -243,6 +272,7 @@ body, .container {
 	min-width: 40vw;
 	display: flex;
 	flex-direction: row;
+	font-size: 2vh;
 	justify-content: center;
 	align-items: center;
 	padding: 20px;
@@ -418,6 +448,10 @@ body, .container {
 	width: 85vw;
 }
 
+.clicked:hover {
+	width: 85vw;
+}
+
 .even {
 	background: rgba(79, 103, 130, 0.21);
 }
@@ -458,6 +492,9 @@ body, .container {
 	}
 	.section-list {
 		padding: 0 10vw;
+	}
+	.start-p {
+		font-size: 4.5vh;
 	}
 
 }
