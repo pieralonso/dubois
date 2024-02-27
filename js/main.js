@@ -14,6 +14,13 @@ const navOptions = Array.from(document.getElementsByClassName('nav-item'));
 const contentHeading = document.getElementById('contentSectionHeading');
 const mainContentP = document.getElementById('mainContentP');
 const mainContentDiv = document.getElementById('mainContentPopUp');
+const visualHeight = `${visualViewport.height}px`;
+
+Array.from(document.getElementsByClassName('container')).forEach(i => i.style.height = visualHeight)
+home.style.height = visualHeight;
+mainMenu.style.height = visualHeight;
+mainContent.style.height = visualHeight;
+mainContentDiv.style.height = visualHeight;
 
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
@@ -32,7 +39,7 @@ function toggleInfo() {
     Array.from(document.getElementsByClassName('list-item')).forEach(function (item) {
         item.addEventListener('click', function () {
             mainContentP.innerHTML = "";
-            fadeIn(mainContentP, 2)
+            fadeIn(mainContentP, 1)
             mainContentP.innerHTML = item.innerHTML;
             mainContentDiv.style.display = 'flex';
             Array.from(document.getElementsByClassName('item-type')).forEach(function (item) {
@@ -46,15 +53,13 @@ function toggleInfo() {
 function fadeIn(htmlElement, n) {
     htmlElement.style.animation = `fadeIn ${n}s ease`;
 }
-function fadeOut(htmlElement, n) {
-     htmlElement.style.animation = `fadeOut ${n}s ease`;
-}
+
 function toggleElements(elementToShow) {
     Array.from(document.getElementsByClassName("section")).forEach(function (element) {
         element.classList.add('hidden');
     })
     elementToShow.classList.remove("hidden");
-    fadeIn(elementToShow, 1.5)
+    fadeIn(elementToShow, 1)
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -120,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
     },)
     toggleElements(home);
     startButton.addEventListener('click', () => toggleElements(mainMenu));
-    startButton.addEventListener('click', () => fadeOut(home, 2));
 
     backToNiveles.addEventListener('click', () => toggleElements(mainMenu));
     back.addEventListener('click', function () {
@@ -175,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('startP').style.display = "flex";
             }
             
-            fadeIn(document.getElementById('navNiveaux'), 1.5)
+            fadeIn(document.getElementById('navNiveaux'), 1)
             
         });
         
@@ -213,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         toggleInfo()
                     });
                     Array.from(document.getElementsByClassName('list-item')).forEach(function (b) {
-                        fadeIn(b, 1.5)
+                        fadeIn(b, 4)
                     })
                 }, )
                 toggleInfo()

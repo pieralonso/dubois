@@ -10,8 +10,8 @@
         <script src="./js/main.js" type="module" defer></script>
         <title>Dubois Buyse </title>
     </head>
-    <body>
-        <main class="main container">
+    <body class="body container" id="body">
+        <main class="main container" id="container">
             <section class="section home" id="home">
                 <header class="home-header">
                     <h1 class="header-h1">VOCABULAIRE ORTOGRAPHIQUE DUBOIS - BUYSE</h1>
@@ -24,17 +24,17 @@
                     <a href="#mainMenu"><button class="start-button loading" id="startButton">commencer</button></a>
                 </section>
             </section>
-            <section class="section main-menu" id="mainMenu">
+            <section class="section main-menu hidden" id="mainMenu">
                 <span class="main-icon" id="backToHome"> 
-                    <a href="#home"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg"  viewBox="0 -960 960 960" ><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a>
+                    <a href="#home"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white"  viewBox="0 -960 960 960" ><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></a>
                 </span>
                 <p class="start-p" id="startP">CHOISIR UN NIVEAU D’APPRENTISSAGE</p>
                 <header class="menu-header" id="menuHeader">
                     <nav class="header-nav">
                         <ul class="nav-grades">
-                            <li class="grades-item" id="a1"><a href="#mainMenu">A1</a></li>
+                            <li class="grades-item even" id="a1"><a href="#mainMenu">A1</a></li>
                             <li class="grades-item even" id="a2"><a href="#mainMenu">A2</a></li>
-                            <li class="grades-item" id="b1"><a href="#mainMenu">B1</a></li>
+                            <li class="grades-item even" id="b1"><a href="#mainMenu">B1</a></li>
                             <li class="grades-item even" id="b2"><a href="#mainMenu">B2</a></li>
                         </ul>
                     </nav>
@@ -54,12 +54,12 @@
                     </ol>
                 </nav>
             </section>
-            <section class="section main-content" id="mainContent">
+            <section class="section main-content hidden" id="mainContent">
                 <div class="main-content-popup" id="mainContentPopUp">
                     <p class="main-content-p" id="mainContentP"></p>
                 </div>
                 <span class="main-icon"> 
-                    <a href="#mainMenu"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a>
+                    <a href="#mainMenu"><svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white"  viewBox="0 -960 960 960" ><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></a>
                 </span>
                 <header class="content-header">
                     <h3 class="header-heading" id="contentSectionHeading"> seccion - nivel - subnivel</h3>
