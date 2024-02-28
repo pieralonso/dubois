@@ -6,7 +6,6 @@ const palabrasEchelon = filtrarPor('echelon');
 const startButton = document.getElementById("startButton");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back, backToNiveles] = Array.from(document.getElementsByClassName('main-icon'));
-const itemsStart = Array.from(document.getElementsByClassName('start-nav-item'));
 const gradesLinks = Array.from(document.getElementsByClassName('grades-item'));
 const nivelesLink = Array.from(document.getElementsByClassName('niveaux-item'));
 const sectionList = document.getElementById('sectionList');
@@ -60,6 +59,17 @@ function toggleElements(elementToShow) {
     })
     elementToShow.classList.remove("hidden");
     fadeIn(elementToShow, 1)
+}
+
+function toggleElements2(element1, element2) {
+    Array.from(document.getElementsByClassName("section")).forEach(function (element) {
+        element.classList.add('hidden');
+    })
+    element1.classList.remove("hidden");
+    element2.classList.remove("hidden");
+
+    fadeIn(element1, 1)
+    fadeIn(element2, 1)
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -124,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     },)
     toggleElements(home);
-    startButton.addEventListener('click', () => toggleElements(mainMenu));
+    startButton.addEventListener('click', () => visualViewport.width > 600 ? toggleElements2(mainMenu, mainContent) : toggleElements(mainMenu));
 
     backToNiveles.addEventListener('click', () => toggleElements(mainMenu));
     back.addEventListener('click', function () {
@@ -143,19 +153,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     Array.from(document.getElementsByClassName('niveaux-item')).forEach(element =>
-        element.addEventListener('click', () => toggleElements(mainContent))
+        element.addEventListener('click', () => 
+            visualViewport.width > 600 ? toggleElements2(mainMenu, mainContent) : toggleElements(mainContent)
+        )
     );
-    
-    itemsStart.forEach(function (element, index) {
-        element.addEventListener('click', function () {
-            toggleElements(mainMenu);
-            gradesLinks.forEach(item => item.classList.remove('clicked'));
-            gradesLinks[index].classList.add('clicked');
-            nivelesLink.forEach(function(elemento, posicion) {
-                elemento.id = `${gradesLinks[index].id}Nivel${posicion + 1}`
-            })
-        })
-    })
     
     
     gradesLinks.forEach((element, index) => {
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('navNiveaux').style.display = "none";
                 document.getElementById('menuHeader').style.height = '100%';
                 document.getElementById('startP').style.display = "flex";
+                visualViewport.width > 600 ? document.getElementById('startP').style.display = "none": document.getElementById('startP').style.display = "flex";
             }
             
             fadeIn(document.getElementById('navNiveaux'), 1)
@@ -199,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     nivelesLink.forEach(function (element, index) {
         element.addEventListener('click', function () {
+            nivelesLink.forEach(i => i.classList.remove('selected'));
+            element.classList.add('selected')
             const nivel = index + 1; 
             
             // Iterar sobre el objeto idToRango
