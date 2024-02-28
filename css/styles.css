@@ -409,6 +409,16 @@ body, .container {
 	height: 3.5vh;
 }
 
+.selected {
+	background-color: #FF8738;
+	color: #002654;
+	
+}
+
+.nav-link-item {
+	width: 100%;
+}
+
 .clicked {
 	width: 85%;
 	height: 10vh;
