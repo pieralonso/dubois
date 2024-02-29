@@ -169,6 +169,9 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   backToNiveles.addEventListener("click", () => toggleElements(mainMenu));
+  backToNiveles.addEventListener("click", () =>
+    nivelesLink.forEach((i) => i.classList.remove("selected")),
+  );
   back.addEventListener("click", function () {
     if (back.id === "backToView") {
       gradesLinks.forEach((item) => item.classList.remove("clicked"));
