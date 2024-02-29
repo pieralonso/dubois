@@ -307,7 +307,7 @@ body::-webkit-scrollbar {
 }
 
 .niveaux-item {
-    min-width: 20vw;
+    min-width: 35vw;
     display: flex;
     flex-direction: row;
     font-size: 2vh;
