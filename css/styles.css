@@ -64,9 +64,8 @@ body,
         sans-serif;
     scrollbar-width: none;
     overflow-y: scroll;
-    height: calc(
-        100vh - 60px
-    ); /* Fallback for browsers that do not support Custom Properties */
+    height: calc(100vh - 60px);
+    /* Fallback for browsers that do not support Custom Properties */
 }
 
 .container::-webkit-scrollbar,
@@ -75,15 +74,10 @@ body::-webkit-scrollbar {
 }
 
 .section {
-    height: calc(
-        100vh - 60px
-    ); /* Fallback for browsers that do not support Custom Properties */
+    height: calc(100vh - 60px);
+    /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
     min-height: -webkit-fill-available;
-}
-
-.header-h1 {
-    padding: 0 20px;
 }
 
 .header-nav {
@@ -96,7 +90,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 52px 31px;
+    padding: 7vh 3vh;
     gap: 29px;
     opacity: 1;
     animation: fadeIn 3s ease;
@@ -106,14 +100,17 @@ body::-webkit-scrollbar {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
+
 @keyframes fadeOut {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -123,12 +120,8 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 29px;
+    gap: 2.2vh;
     align-items: center;
-}
-
-.home-header {
-    padding: 30px 0 10px 0;
 }
 
 .header-h1 {
@@ -146,14 +139,14 @@ body::-webkit-scrollbar {
         sans-serif;
     font-style: normal;
     font-weight: 100;
-    font-size: 5.44vh;
+    font-size: 5vh;
     line-height: 120%;
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 20px 0px;
+    padding: 3.6vh 0px;
     gap: 10px;
     color: #ffffff;
     border-bottom: 1px solid #f2f2f2;
@@ -161,7 +154,8 @@ body::-webkit-scrollbar {
 
 .start-button {
     background-color: #cc2936;
-    padding: 10px 25px;
+    margin-top: 1.5vh;
+    padding: 1.4vh 3.5vh;
     border-radius: 5px;
     color: #ffffff;
     font-size: 2.7vh;
@@ -184,7 +178,7 @@ body::-webkit-scrollbar {
 }
 
 .citado {
-    font-size: 2vh;
+    font-size: 2.3vh;
     font-weight: 100;
     margin: 0;
     padding: 0;
@@ -321,7 +315,8 @@ body::-webkit-scrollbar {
 .main-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-evenly;
+    align-items: space-betwen;
     padding: 0px;
 }
 
@@ -335,7 +330,7 @@ body::-webkit-scrollbar {
 }
 
 .header-heading {
-    font-size: 2.9vh;
+    font-size: 1.25rem;
     font-weight: 400;
     border-bottom: 1px solid #ececec;
     display: flex;
@@ -353,7 +348,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    padding: 10px 30px 30px 30px;
+    padding-bottom:30px;
     gap: 10px;
     overflow-x: scroll;
     scrollbar-width: none;
@@ -430,9 +425,8 @@ body::-webkit-scrollbar {
     align-content: center;
     align-items: center;
     z-index: 9999;
-    height: calc(
-        100vh - 60px
-    ); /* Fallback for browsers that do not support Custom Properties */
+    height: calc(100vh - 60px);
+    /* Fallback for browsers that do not support Custom Properties */
     width: 100vw;
     /*	height: calc(var(--vh, 1vh) * 100);*/
 }
@@ -441,6 +435,7 @@ body::-webkit-scrollbar {
     font-size: 6vh;
     color: white;
 }
+
 .item-type {
     display: none;
     font-size: 3vh;
@@ -472,6 +467,7 @@ body::-webkit-scrollbar {
 }
 
 @media screen and (min-width: 650px) {
+
     .section-list,
     .menu-header {
         padding: 0 25px;
@@ -482,17 +478,26 @@ body::-webkit-scrollbar {
         display: flex;
         flex-direction: row;
     }
+
     .home {
+        gap:3.6vw;
+        padding: 4vw 3vw;
         justify-content: center;
     }
+
     .main-menu {
         background-color: rgba(79, 103, 130, 0.21);
         padding: 50px 0;
         width: 20vw;
     }
+
+    .content-nav {
+        padding: 0;
+    }
+
     .main-content {
-        padding: 10vh 0;
         width: 75vw;
+        padding-left: 2.5vw;
     }
 
     .main-icon,
@@ -503,6 +508,7 @@ body::-webkit-scrollbar {
     .menu-header {
         padding: 0;
     }
+
     .main-content-popup {
         top: 0;
         position: 50%;
@@ -518,7 +524,8 @@ body::-webkit-scrollbar {
         width: 70%;
         height: 3vh;
     }
-    .grades-item > a {
+
+    .grades-item>a {
         width: 100%;
     }
 
@@ -526,8 +533,10 @@ body::-webkit-scrollbar {
         background-color: rgba(79, 103, 130, 0.1);
         transform: scale(1.1);
     }
+
     .content-section {
         justify-content: center;
+        flex: 0;
     }
 
     .item-p {
@@ -590,7 +599,30 @@ body::-webkit-scrollbar {
         font-size: 1.6rem;
         color: white;
     }
+
     .clicked:hover {
         background-color: #cc2936;
+    }
+
+    .start-button {
+        font-size: 2.2vw;
+        margin-top: 1.5vw;
+        padding: 1.2vw 2.5vw;
+    }
+    .header-h1 {
+        font-size: 4.8vw;
+        padding: 3.6vw 10vw;
+
+    }
+
+    .home-intro {
+        gap: 2.2vw;
+    }
+
+    .info-paragraph {
+        font-size: 1.7vw;
+    }
+    .citado {
+        font-size: 1.5vw;
     }
 }

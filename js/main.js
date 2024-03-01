@@ -38,17 +38,17 @@ function selectedGradeTitle() {
 
 function toggleInfo() {
   [...document.getElementsByClassName("list-item")].forEach(item => {
-      item.addEventListener("click", function () {
-        mainContentP.innerHTML = "";
-        fadeIn(mainContentP, 1);
-        mainContentP.innerHTML = item.innerHTML;
-        mainContentDiv.style.display = "flex";
-        [...document.getElementsByClassName("item-type")].forEach(type => {
-            type.style.display = "block";
-          },
-        );
-      });
-    },
+    item.addEventListener("click", function () {
+      mainContentP.innerHTML = "";
+      fadeIn(mainContentP, 1);
+      mainContentP.innerHTML = item.innerHTML;
+      mainContentDiv.style.display = "flex";
+      [...document.getElementsByClassName("item-type")].forEach(type => {
+        type.style.display = "block";
+      },
+      );
+    });
+  },
   );
 }
 
@@ -162,8 +162,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach((element) =>
     element.addEventListener("click", () =>
-      visualViewport.width > 600?
-      toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
+      visualViewport.width > 600 ?
+        toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
     ),
   );
 
