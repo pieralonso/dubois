@@ -14,6 +14,7 @@ const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => arr
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back, backToNiveles] = Array.from(document.getElementsByClassName("main-icon"));
+const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
 
 containers.forEach(container => container.style.height = visualHeight);
 home.style.height = visualHeight;
@@ -168,6 +169,19 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   gradesLinks.forEach((element) => {
+    let currentText = element.children[0].innerHTML
+    element.addEventListener('mouseenter', function() {
+      element.classList.contains("clicked") ?
+      element.children[0].innerHTML = arrowIcon :
+      element.children[0].innerHTML = currentText
+      });
+
+    element.addEventListener('mouseleave', function() {
+      element.classList.contains("clicked") ?
+      element.children[0].innerHTML = currentText :
+      element.children[0].innerHTML = currentText
+      })
+
     element.addEventListener("click", function () {
       if (!element.classList.contains("clicked")) {
         back.id = "backToView";
@@ -179,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("menuHeader").style.height = "10%";
         document.getElementById("startP").style.display = "none";
       } else if (element.classList.contains("clicked")) {
+        element.children[0].innerHTML = currentText;
         back.id = "backToHome";
         gradesLinks.forEach((item) => item.classList.remove("clicked"));
         gradesLinks.forEach((item) => item.classList.remove("hidden"));
@@ -208,8 +223,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach(function (element, index) {
     element.addEventListener("click", function () {
-      nivelesLink.forEach((i) => i.classList.remove("selected"));
-      element.classList.add("selected");
+      nivelesLink.forEach((i) => i.classList.remove("nivel-selected"));
+      element.classList.add("nivel-selected");
       const nivel = index + 1;
 
       // Iterar sobre el objeto idToRango
