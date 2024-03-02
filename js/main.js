@@ -1,30 +1,22 @@
 import { duboisData } from "./duboisArray.js";
-
-const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
-const filtrarPor = (propiedad) => (array) =>
-  duboisData.filter((elemento) =>
-    array.some((arrayItem) => elemento[propiedad] === arrayItem),
-  );
-const palabrasEchelon = filtrarPor("echelon");
-const startButton = document.getElementById("startButton");
-const [home, mainMenu, mainContent] = Array.from(
-  document.getElementsByClassName("section"),
-);
-const [back, backToNiveles] = Array.from(
-  document.getElementsByClassName("main-icon"),
-);
 const gradesLinks = Array.from(document.getElementsByClassName("grades-item"));
 const nivelesLink = Array.from(document.getElementsByClassName("niveaux-item"));
+const containers = Array.from(document.getElementsByClassName("container"));
 const sectionList = document.getElementById("sectionList");
 const navOptions = Array.from(document.getElementsByClassName("nav-item"));
 const contentHeading = document.getElementById("contentSectionHeading");
 const mainContentP = document.getElementById("mainContentP");
 const mainContentDiv = document.getElementById("mainContentPopUp");
+const startButton = document.getElementById("startButton");
 const visualHeight = `${visualViewport.height}px`;
+const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => array.some((arrayItem) => elemento[propiedad] === arrayItem));
+const palabrasEchelon = filtrarPor("echelon");
+const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
+const [back, backToNiveles] = Array.from(document.getElementsByClassName("main-icon"));
+const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
 
-Array.from(document.getElementsByClassName("container")).forEach(
-  (i) => (i.style.height = visualHeight),
-);
+containers.forEach(container => container.style.height = visualHeight);
 home.style.height = visualHeight;
 mainMenu.style.height = visualHeight;
 mainContent.style.height = visualHeight;
@@ -38,28 +30,26 @@ const idToRango = {
   b2: [24, 43],
 };
 
-function selectedSection() {
-  const selectedElement = gradesLinks.find((element) =>
-    element.className.includes("clicked"),
+function selectedGradeTitle() {
+  const selectedGrade = gradesLinks.find((grade) =>
+    grade.className.includes("clicked"),
   );
-  return selectedElement ? selectedElement.innerHTML : null;
+  return selectedGrade ? selectedGrade.innerHTML : null;
 }
 
 function toggleInfo() {
-  Array.from(document.getElementsByClassName("list-item")).forEach(
-    function (item) {
-      item.addEventListener("click", function () {
-        mainContentP.innerHTML = "";
-        fadeIn(mainContentP, 1);
-        mainContentP.innerHTML = item.innerHTML;
-        mainContentDiv.style.display = "flex";
-        Array.from(document.getElementsByClassName("item-type")).forEach(
-          function (item) {
-            item.style.display = "block";
-          },
-        );
-      });
-    },
+  [...document.getElementsByClassName("list-item")].forEach(item => {
+    item.addEventListener("click", function () {
+      mainContentP.innerHTML = "";
+      fadeIn(mainContentP, 1);
+      mainContentP.innerHTML = item.innerHTML;
+      mainContentDiv.style.display = "flex";
+      [...document.getElementsByClassName("item-type")].forEach(type => {
+        type.style.display = "block";
+      },
+      );
+    });
+  },
   );
 }
 
@@ -67,8 +57,8 @@ function fadeIn(htmlElement, n) {
   htmlElement.style.animation = `fadeIn ${n}s ease`;
 }
 
-function toggleElements(elementToShow) {
-  Array.from(document.getElementsByClassName("section")).forEach(
+function toggleElement(elementToShow) {
+  [home, mainMenu, mainContent].forEach(
     function (element) {
       element.classList.add("hidden");
     },
@@ -77,12 +67,10 @@ function toggleElements(elementToShow) {
   fadeIn(elementToShow, 1);
 }
 
-function toggleElements2(element1, element2) {
-  Array.from(document.getElementsByClassName("section")).forEach(
-    function (element) {
-      element.classList.add("hidden");
-    },
-  );
+function toggleElements(element1, element2) {
+  [home, mainMenu, mainContent].forEach(function (element) {
+    element.classList.add("hidden");
+  });
   element1.classList.remove("hidden");
   element2.classList.remove("hidden");
 
@@ -124,26 +112,14 @@ function distribuirPalabrasEnArrays(arrayPalabras) {
 
 function crearListaDeRango(a, b, nivel, section) {
   sectionList.innerHTML = "";
-  const arrayDePalabras = distribuirPalabrasEnArrays(
-    palabrasEchelon(rango(a, b)),
-  )[`${nivel}`][`${section}`];
-  arrayDePalabras.forEach(function (element) {
-    const listItem = document.createElement("li");
-    const spanType = document.createElement("span");
-    listItem.classList.add("list-item");
-    spanType.classList.add("item-type");
-    listItem.innerHTML = element.nom;
-    spanType.innerHTML = element.type;
-    sectionList.appendChild(listItem);
-    listItem.appendChild(spanType);
-  });
 
-  return arrayDePalabras;
+  return distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[nivel][section]
+    .map(element => {
+      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type">${element.type}</span></li>`);
+      return element;
+    });
 }
 
-console.log(
-  Object.entries(distribuirPalabrasEnArrays(palabrasEchelon(rango(24, 43)))),
-);
 
 window.onload = function () {
   // Limpiar el hash al cargar la página
@@ -161,14 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
   });
-  toggleElements(home);
+  toggleElement(home);
   startButton.addEventListener("click", () =>
     visualViewport.width > 600
-      ? toggleElements2(mainMenu, mainContent)
-      : toggleElements(mainMenu),
+      ? toggleElements(mainMenu, mainContent)
+      : toggleElement(mainMenu),
   );
 
-  backToNiveles.addEventListener("click", () => toggleElements(mainMenu));
+  backToNiveles.addEventListener("click", () => toggleElement(mainMenu));
   backToNiveles.addEventListener("click", () =>
     nivelesLink.forEach((i) => i.classList.remove("selected")),
   );
@@ -181,20 +157,31 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("startP").style.display = "flex";
       back.id = "backToHome";
     } else if (back.id === "backToHome") {
-      toggleElements(home);
+      toggleElement(home);
     }
   });
 
-  Array.from(document.getElementsByClassName("niveaux-item")).forEach(
-    (element) =>
-      element.addEventListener("click", () =>
-        visualViewport.width > 600
-          ? toggleElements2(mainMenu, mainContent)
-          : toggleElements(mainContent),
-      ),
+  nivelesLink.forEach((element) =>
+    element.addEventListener("click", () =>
+      visualViewport.width > 600 ?
+        toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
+    ),
   );
 
   gradesLinks.forEach((element) => {
+    let currentText = element.children[0].innerHTML
+    element.addEventListener('mouseenter', function() {
+      element.classList.contains("clicked") ?
+      element.children[0].innerHTML = arrowIcon :
+      element.children[0].innerHTML = currentText
+      });
+
+    element.addEventListener('mouseleave', function() {
+      element.classList.contains("clicked") ?
+      element.children[0].innerHTML = currentText :
+      element.children[0].innerHTML = currentText
+      })
+
     element.addEventListener("click", function () {
       if (!element.classList.contains("clicked")) {
         back.id = "backToView";
@@ -206,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("menuHeader").style.height = "10%";
         document.getElementById("startP").style.display = "none";
       } else if (element.classList.contains("clicked")) {
+        element.children[0].innerHTML = currentText;
         back.id = "backToHome";
         gradesLinks.forEach((item) => item.classList.remove("clicked"));
         gradesLinks.forEach((item) => item.classList.remove("hidden"));
@@ -235,8 +223,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach(function (element, index) {
     element.addEventListener("click", function () {
-      nivelesLink.forEach((i) => i.classList.remove("selected"));
-      element.classList.add("selected");
+      nivelesLink.forEach((i) => i.classList.remove("nivel-selected"));
+      element.classList.add("nivel-selected");
       const nivel = index + 1;
 
       // Iterar sobre el objeto idToRango
@@ -267,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         toggleInfo();
       });
-      contentHeading.innerHTML = `${selectedSection()} - ${element.innerHTML}`;
+      contentHeading.innerHTML = `${selectedGradeTitle()} - ${element.innerHTML}`;
       navOptions.forEach((item) => item.classList.remove("selected"));
       navOptions[0].classList.add("selected");
     });
