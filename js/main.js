@@ -14,13 +14,6 @@ const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName
 const [back, backToNiveles] = Array.from(document.getElementsByClassName("main-icon"));
 const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
 
-function set100vh() {
-        let value = `${visualViewport.height}px`;
-        document.documentElement.style.setProperty("--actualVH", value)
-    }
-
-visualViewport.onresize = set100vh
-
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
   a1: [1, 15],
@@ -63,7 +56,7 @@ function toggleElement(elementToShow) {
     },
   );
   elementToShow.classList.remove("hidden");
-  fadeIn(elementToShow, 1);
+  fadeIn(elementToShow, 2);
 }
 
 function toggleElements(element1, element2) {
@@ -73,8 +66,8 @@ function toggleElements(element1, element2) {
   element1.classList.remove("hidden");
   element2.classList.remove("hidden");
 
-  fadeIn(element1, 1);
-  fadeIn(element2, 1);
+  fadeIn(element1, 2);
+  fadeIn(element2, 2);
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
