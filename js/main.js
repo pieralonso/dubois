@@ -11,7 +11,7 @@ const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => array.some((arrayItem) => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
-const [back, backToNiveles] = Array.from(document.getElementsByClassName("main-icon"));
+const [back] = Array.from(document.getElementsByClassName("main-icon"));
 const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
 
 // Mapeo de cadenas de ID a rangos
@@ -136,8 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
       : toggleElement(mainMenu),
   );
 
-  backToNiveles.addEventListener("click", () => toggleElement(mainMenu));
-  backToNiveles.addEventListener("click", () =>
+  back.addEventListener("click", () =>
     nivelesLink.forEach((i) => i.classList.remove("selected")),
   );
   back.addEventListener("click", function () {
@@ -155,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach((element) =>
     element.addEventListener("click", () =>
-      visualViewport.width > 600 ?
+      visualViewport.width > 700 ?
         toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
     ),
   );
@@ -163,40 +162,23 @@ document.addEventListener("DOMContentLoaded", function () {
   gradesLinks.forEach((element) => {
     let currentText = element.children[0].innerHTML
     element.addEventListener('mouseenter', function() {
-      element.classList.contains("clicked") ?
+      element.classList.contains("clicked") && visualViewport.width > 700 ?
       element.children[0].innerHTML = arrowIcon :
       element.children[0].innerHTML = currentText
       });
 
     element.addEventListener('mouseleave', function() {
-      element.classList.contains("clicked") ?
+      element.classList.contains("clicked") && visualViewport.width > 700 ?
       element.children[0].innerHTML = currentText :
       element.children[0].innerHTML = currentText
       })
 
     element.addEventListener("click", function () {
-      if (!element.classList.contains("clicked")) {
-        back.id = "backToView";
+      const isClicked = element.classList.contains("clicked");
+      if (!isClicked) {
         gradesLinks.forEach((item) => item.classList.remove("clicked"));
         element.classList.add("clicked");
-        gradesLinks.forEach((item) => item.classList.add("hidden"));
-        element.classList.remove("hidden");
-        document.getElementById("navNiveaux").style.display = "flex";
-        document.getElementById("menuHeader").style.height = "10%";
-        document.getElementById("startP").style.display = "none";
-      } else if (element.classList.contains("clicked")) {
-        element.children[0].innerHTML = currentText;
-        back.id = "backToHome";
-        gradesLinks.forEach((item) => item.classList.remove("clicked"));
-        gradesLinks.forEach((item) => item.classList.remove("hidden"));
-        document.getElementById("navNiveaux").style.display = "none";
-        document.getElementById("menuHeader").style.height = "100%";
-        document.getElementById("startP").style.display = "flex";
-        visualViewport.width > 600
-          ? (document.getElementById("startP").style.display = "none")
-          : (document.getElementById("startP").style.display = "flex");
       }
-
       fadeIn(document.getElementById("navNiveaux"), 1);
     });
   });
