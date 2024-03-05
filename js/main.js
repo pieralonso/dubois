@@ -45,16 +45,17 @@ function toggleInfo() {
   );
 }
 
-function fadeIn(htmlElement, n) {
-  htmlElement.style.animation = `fadeIn ${n}s ease`;
+function fadeIn(htmlElement) {
+  htmlElement.classList.remove("fadeIn");
+  void htmlElement.offsetWidth;
+  htmlElement.classList.add("fadeIn");
 }
 
 function toggleElement(elementToShow) {
-  [home, mainMenu, mainContent].forEach(
-    function (element) {
-      element.classList.add("hidden");
-    },
-  );
+  [home, mainMenu, mainContent].forEach( element => {
+    element.classList.add("hidden")
+  });
+
   elementToShow.classList.remove("hidden");
   fadeIn(elementToShow, 2);
 }
@@ -130,31 +131,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   toggleElement(home);
-  startButton.addEventListener("click", () =>
-    visualViewport.width > 600
-      ? toggleElements(mainMenu, mainContent)
-      : toggleElement(mainMenu),
-  );
+  startButton.addEventListener("click", function () {
+    visualViewport.width > 768 ? toggleElements(mainMenu, mainContent):toggleElement(mainMenu);
+    document.getElementById('headerIcon').classList.remove("hidden");
+  });
 
-  back.addEventListener("click", () =>
-    nivelesLink.forEach((i) => i.classList.remove("selected")),
-  );
-  back.addEventListener("click", function () {
-    if (back.id === "backToView") {
-      gradesLinks.forEach((item) => item.classList.remove("clicked"));
-      gradesLinks.forEach((item) => item.classList.remove("hidden"));
-      document.getElementById("navNiveaux").style.display = "none";
-      document.getElementById("menuHeader").style.height = "100%";
-      document.getElementById("startP").style.display = "flex";
-      back.id = "backToHome";
-    } else if (back.id === "backToHome") {
-      toggleElement(home);
-    }
+  back.addEventListener("click", () => {
+      switch (back.id) {
+          case 'backToHome':
+              toggleElement(home);
+              document.getElementById('headerIcon').classList.add("hidden")
+              break;
+          case 'id2':
+              // Código para manejar el caso 'id2'
+              break;
+          default:
+              // Código para manejar todos los otros casos
+              break;
+      }
   });
 
   nivelesLink.forEach((element) =>
     element.addEventListener("click", () =>
-      visualViewport.width > 700 ?
+      visualViewport.width > 768 ?
         toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
     ),
   );
@@ -162,24 +161,24 @@ document.addEventListener("DOMContentLoaded", function () {
   gradesLinks.forEach((element) => {
     let currentText = element.children[0].innerHTML
     element.addEventListener('mouseenter', function() {
-      element.classList.contains("clicked") && visualViewport.width > 700 ?
+      element.classList.contains("clicked") && visualViewport.width > 768 ?
       element.children[0].innerHTML = arrowIcon :
       element.children[0].innerHTML = currentText
       });
 
     element.addEventListener('mouseleave', function() {
-      element.classList.contains("clicked") && visualViewport.width > 700 ?
+      element.classList.contains("clicked") && visualViewport.width > 768 ?
       element.children[0].innerHTML = currentText :
       element.children[0].innerHTML = currentText
       })
 
-    element.addEventListener("click", function () {
+    element.addEventListener("click", () => {
       const isClicked = element.classList.contains("clicked");
       if (!isClicked) {
         gradesLinks.forEach((item) => item.classList.remove("clicked"));
         element.classList.add("clicked");
       }
-      fadeIn(document.getElementById("navNiveaux"), 1);
+      fadeIn(document.getElementById('navNiveaux'))
     });
   });
 
