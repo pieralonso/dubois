@@ -239,6 +239,7 @@ text-align: center;
 }
 
 .content-section {
+    padding: 0 5vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,7 +261,7 @@ text-align: center;
 }
 
 .nav-item {
-    padding: .3rem 1rem;
+    padding: .4rem 1.1rem;
     background-color: #b3b3b3;
     color: var(--bg-color);
     border-radius: 7px;
@@ -318,7 +319,7 @@ text-align: center;
 }
 
 .fadeIn {
-    animation: fadeIn .1s ease;
+    animation: fadeIn 1s ease;
 }
 
 .hidden {

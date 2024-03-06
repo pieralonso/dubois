@@ -40,6 +40,7 @@ const backActions = {
     },
     'backToMenu': () => {
         toggleElement(mainMenu);
+        back.id = 'backToHome'
     },
     'backToMots' : () => {
       back.id = 'backToMenu'
@@ -52,7 +53,6 @@ const backActions = {
       );
     },
 };
-s
 
 function selectedGradeTitle() {
   const selectedGrade = gradesLinks.find((grade) =>
@@ -76,7 +76,6 @@ function toggleInfo() {
       mainContentP.innerHTML = item.innerHTML;
       mainContentDiv.classList.remove("hidden");
       document.getElementById("mainContentWrapper").classList.add("hidden")
-      console.log(item.children[0]);
     };
 
     // Añade el event listener
