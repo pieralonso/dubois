@@ -3,4 +3,5 @@
 *.tmp
 server.js
 .DS_store
+package.json
 prueba.js
