@@ -14,6 +14,17 @@ const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName
 const [back] = Array.from(document.getElementsByClassName("main-icon"));
 const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
 
+function updateHeight() {
+    let isArrowHidden = back.classList.contains("hidden");
+    let isDivHidden = mainContentDiv.classList.contains("hidden");
+    let vh = window.innerHeight;
+    isArrowHidden && isDivHidden ?
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+    : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
+
+
+}
+
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
   a1: [1, 15],
@@ -21,6 +32,27 @@ const idToRango = {
   b1: [20, 23],
   b2: [24, 43],
 };
+// mapeo funciones para ir hacia atras
+const backActions = {
+    'backToHome': () => {
+        toggleElement(home);
+        document.getElementById('headerIcon').classList.add("hidden");
+    },
+    'backToMenu': () => {
+        toggleElement(mainMenu);
+    },
+    'backToMots' : () => {
+      back.id = 'backToMenu'
+      mainContentDiv.classList.add("hidden");
+      document.getElementById("mainContentWrapper").classList.remove("hidden");
+      Array.from(document.getElementsByClassName("item-type")).forEach(
+        function (item) {
+          item.classList.add("hidden");
+        },
+      );
+    },
+};
+s
 
 function selectedGradeTitle() {
   const selectedGrade = gradesLinks.find((grade) =>
@@ -31,18 +63,25 @@ function selectedGradeTitle() {
 
 function toggleInfo() {
   [...document.getElementsByClassName("list-item")].forEach(item => {
-    item.addEventListener("click", function () {
+    // Elimina el event listener existente
+    item.removeEventListener("click", item.clickHandler);
+
+
+    // Define el event listener
+    item.clickHandler = function () {
+      back.id = 'backToMots';
       mainContentP.innerHTML = "";
-      fadeIn(mainContentP, 1);
+      fadeIn(mainContentP);
+      item.children[0].classList.remove("hidden");
       mainContentP.innerHTML = item.innerHTML;
-      mainContentDiv.style.display = "flex";
-      [...document.getElementsByClassName("item-type")].forEach(type => {
-        type.style.display = "block";
-      },
-      );
-    });
-  },
-  );
+      mainContentDiv.classList.remove("hidden");
+      document.getElementById("mainContentWrapper").classList.add("hidden")
+      console.log(item.children[0]);
+    };
+
+    // Añade el event listener
+    item.addEventListener("click", item.clickHandler);
+  });
 }
 
 function fadeIn(htmlElement) {
@@ -108,7 +147,7 @@ function crearListaDeRango(a, b, nivel, section) {
 
   return distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[nivel][section]
     .map(element => {
-      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type">${element.type}</span></li>`);
+      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type hidden" id="itemType">${element.type}</span></li>`);
       return element;
     });
 }
@@ -120,41 +159,45 @@ window.onload = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  updateHeight();
+  window.onresize = updateHeight;
+
+  toggleElement(home);
+
   mainContentDiv.addEventListener("click", function (event) {
     if (event.target.id !== mainContentP.id) {
-      mainContentDiv.style.display = "none";
+      back.id = 'backToMenu';
+      mainContentDiv.classList.add("hidden");
+      document.getElementById("mainContentWrapper").classList.remove("hidden");
       Array.from(document.getElementsByClassName("item-type")).forEach(
         function (item) {
-          item.style.display = "none";
+          item.classList.add("hidden");
         },
       );
     }
   });
-  toggleElement(home);
+
   startButton.addEventListener("click", function () {
     visualViewport.width > 768 ? toggleElements(mainMenu, mainContent):toggleElement(mainMenu);
     document.getElementById('headerIcon').classList.remove("hidden");
+    gradesLinks.forEach(element => element.classList.remove("clicked"));
+    gradesLinks[0].classList.add("clicked");
+
   });
 
   back.addEventListener("click", () => {
-      switch (back.id) {
-          case 'backToHome':
-              toggleElement(home);
-              document.getElementById('headerIcon').classList.add("hidden")
-              break;
-          case 'id2':
-              // Código para manejar el caso 'id2'
-              break;
-          default:
-              // Código para manejar todos los otros casos
-              break;
-      }
+      const action = backActions[back.id];
+      action();
+
   });
 
   nivelesLink.forEach((element) =>
-    element.addEventListener("click", () =>
+    element.addEventListener("click", function() {
       visualViewport.width > 768 ?
-        toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
+        toggleElements(mainMenu, mainContent) : toggleElement(mainContent);
+      back.id = "backToMenu";
+        }
     ),
   );
 
@@ -220,11 +263,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             toggleInfo();
           });
-          Array.from(document.getElementsByClassName("list-item")).forEach(
-            function (b) {
-              fadeIn(b, 4);
-            },
-          );
         });
         toggleInfo();
       });
