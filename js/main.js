@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   startButton.addEventListener("click", function () {
-    visualViewport.width > 768 ? toggleElements(mainMenu, mainContent):toggleElement(mainMenu);
+    visualViewport.width > 1024 ? toggleElements(mainMenu, mainContent):toggleElement(mainMenu);
     document.getElementById('headerIcon').classList.remove("hidden");
     gradesLinks.forEach(element => element.classList.remove("clicked"));
     gradesLinks[0].classList.add("clicked");
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach((element) =>
     element.addEventListener("click", function() {
-      visualViewport.width > 768 ?
+      visualViewport.width > 1024 ?
         toggleElements(mainMenu, mainContent) : toggleElement(mainContent);
       back.id = "backToMenu";
         }
@@ -201,18 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   gradesLinks.forEach((element) => {
-    let currentText = element.children[0].innerHTML
-    element.addEventListener('mouseenter', function() {
-      element.classList.contains("clicked") && visualViewport.width > 768 ?
-      element.children[0].innerHTML = arrowIcon :
-      element.children[0].innerHTML = currentText
-      });
-
-    element.addEventListener('mouseleave', function() {
-      element.classList.contains("clicked") && visualViewport.width > 768 ?
-      element.children[0].innerHTML = currentText :
-      element.children[0].innerHTML = currentText
-      })
 
     element.addEventListener("click", () => {
       const isClicked = element.classList.contains("clicked");
@@ -262,6 +250,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             toggleInfo();
           });
+          Array.from(document.getElementsByClassName("list-item")).forEach(
+            function (b) {
+              fadeIn(b);
+            },
+          );
         });
         toggleInfo();
       });
