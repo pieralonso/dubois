@@ -1,8 +1,6 @@
 # Ignorar archivos temporales
 *.log
 *.tmp
-app.js
+server.js
 .DS_store
 prueba.js
-
-
