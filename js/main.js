@@ -12,17 +12,15 @@ const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => arr
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back] = Array.from(document.getElementsByClassName("main-icon"));
-const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
+
 
 function updateHeight() {
-    let isArrowHidden = back.classList.contains("hidden");
-    let isDivHidden = mainContentDiv.classList.contains("hidden");
-    let vh = window.innerHeight;
+  let isArrowHidden = back.classList.contains("hidden");
+  let isDivHidden = mainContentDiv.classList.contains("hidden");
+  let vh = window.innerHeight;
     isArrowHidden && isDivHidden ?
     document.documentElement.style.setProperty('--vh', `${vh}px`)
     : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
-
-
 }
 
 // Mapeo de cadenas de ID a rangos
@@ -98,17 +96,6 @@ function toggleElement(elementToShow) {
   fadeIn(elementToShow, 2);
 }
 
-function toggleElements(element1, element2) {
-  [home, mainMenu, mainContent].forEach(function (element) {
-    element.classList.add("hidden");
-  });
-  element1.classList.remove("hidden");
-  element2.classList.remove("hidden");
-
-  fadeIn(element1, 2);
-  fadeIn(element2, 2);
-}
-
 function distribuirPalabrasEnArrays(arrayPalabras) {
   const arraysVacios = Object.fromEntries(
     Array.from({ length: 10 }, (_, i) => [`nivel${i + 1}`, []]),
@@ -160,7 +147,7 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", function () {
 
   updateHeight();
-  window.onresize = updateHeight;
+window.addEventListener('resize', updateHeight);
 
   toggleElement(home);
 
@@ -178,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   startButton.addEventListener("click", function () {
-    visualViewport.width > 1024 ? toggleElements(mainMenu, mainContent):toggleElement(mainMenu);
+    toggleElement(mainMenu);
     document.getElementById('headerIcon').classList.remove("hidden");
     gradesLinks.forEach(element => element.classList.remove("clicked"));
     gradesLinks[0].classList.add("clicked");
@@ -193,8 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nivelesLink.forEach((element) =>
     element.addEventListener("click", function() {
-      visualViewport.width > 1024 ?
-        toggleElements(mainMenu, mainContent) : toggleElement(mainContent);
+      toggleElement(mainContent);
       back.id = "backToMenu";
         }
     ),
