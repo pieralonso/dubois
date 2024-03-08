@@ -1,4 +1,3 @@
-# Ignorar archivos temporales
 *.log
 *.tmp
 app.js
@@ -6,3 +5,4 @@ app.js
 prueba.js
 package.json
 server.js
+getClamp.js

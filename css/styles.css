@@ -49,16 +49,38 @@ button {
 }
 
 /* variables */
+
+
+
 :root {
     font-size: 16px;
+
+    --mobile-min: 360px;
+    --mobile: 400px;
+    --mobile-lg: 500px;
+    --tablet-sm: 640px;
+    --tablet: 768px;
+    --desktop: 1280px;
+
     --bg-color: #002654;
     --text-main: rgb(211, 216, 223);
     --text-paragraph: rgba(250, 250, 250, 0.48);
     --vh: 100vh;
+    --vw: 100vw;
     --boton2:rgba(42, 75, 112, 0.68);
     --botton-height:calc(25px + 1rem);
     --item-clicked :#ff8738;
-    --font-factor : calc(0.5vh + 0.5vw);
+
+    --fs-xs: clamp(11.168px, 1.0043vmax + 1.7450vmin, 25px);
+    --fs-sm: clamp(0.83rem, 1.84vw + 0.47rem, 1.5rem);
+    --fs-base: clamp(15px, 1.3489vmax + 2.3438vmin, 30px);
+    --fs-md: clamp(1.2rem, 3.16vw + 0.57rem, 2.34rem);
+    --fs-lg: clamp(1.44rem, 4.11vw + 0.62rem, 2.93rem);
+    --fs-xl: clamp(1.73rem, 5.34vw + 0.66rem, 3.66rem);
+    --fs-2xl: clamp(32px, 5.0000vw + 2.8777vh, 60px);
+    --fs-3xl: clamp(2.49rem, 8.92vw + 0.7rem, 5.72rem);
+    --fs-4xl: clamp(2.99rem, 11.49vw + 0.69rem, 7.15rem);
+
 }
 
 /* comienzo de estilos */
@@ -88,10 +110,9 @@ button {
 }
 
 .main-icon {
-    height: 25px;
     margin-top: 16px;
     margin-left: 16px;
-    display: block;
+    display: flex;
 }
 
 
@@ -106,11 +127,13 @@ button {
     height: 100%;
     justify-content: flex-end;
     align-items: center;
-    gap: 1.188rem;
+    gap: calc(1.4388vmax + 2.5000vmin);
+    gap: clamp(16px, 1.4388vmax + 2.5000vmin, 33px);;
 }
 
 .home-header {
-    padding-bottom: 1rem;
+    padding-bottom: calc(1.4388vmax + 2.5000vmin);
+    padding-bottom: clamp(16px, 1.4388vmax + 2.5000vmin, 33px);
     width: 100%;
     border-bottom: 1px solid;
 }
@@ -142,6 +165,7 @@ button {
 
 .citado {
     font-weight: 200;
+    font-style: italic;
     text-align: center;
     color: var(--text-paragraph);
 }
@@ -165,22 +189,26 @@ button {
 
 .menu-header{
     display: flex;
-    gap: 5vh;
+    gap: calc(2.3112vh + 4.0156vw);
     flex-direction: column;
     align-items:center;
 }
 
 .start-p {
+    order: 2;
     text-align: center;
-    font-weight: 300;
-
+    font-weight: 200;
     width: 80%;
-    line-height: 150%;
+    border-radius: 13px;
+    border: 1px solid #1C3D68;
+    padding:15px 0 ;
+    line-height: 110%;
 }
 
 .nav-grades {
     text-align: center;
     display: flex;
+    margin-top: 1rem;
     justify-content: space-evenly;
     flex-direction: row;
 }
@@ -223,7 +251,7 @@ button {
     padding: .5rem 1rem;
     transition: all .5s ease;
     border-radius: 7px;
-    font-weight: bold;
+    font-weight: regular;
 
 }
 
@@ -256,12 +284,12 @@ button {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    gap: .7rem;
+    gap: calc(1.0072vh + 1.7500vw);
 }
 
 .list-item {
     background-color: var(--boton2);
-    padding: 5px 15px;
+    padding: 5px 8px;
     border-radius: 7px;
 }
 
@@ -309,6 +337,17 @@ button {
     display: block;
 }
 
+.icon-svg {
+    width: clamp(25px, 2.2482vmax + 3.9063vmin, 50px);
+    height: clamp(25px, 2.2482vmax + 3.9063vmin, 50px);
+}
+
+.icon-link {
+    height: clamp(25px, 2.2482vmax + 3.9063vmin, 50px);
+    width: clamp(25px, 2.2482vmax + 3.9063vmin, 50px);
+}
+
+
 
 .selected {
     background-color: var(--item-clicked);
@@ -334,152 +373,77 @@ button {
 @media screen and (orientation: portrait) {
 
     .header-h1 {
-        font-size: calc(1.8rem + var(--font-factor));
+        font-size: var(--fs-2xl);
     }
 
     .info-paragraph {
-        font-size: calc(.90rem + var(--font-factor));
+        font-size: var(--fs-base);
     }
 
     .citado {
-        font-size: calc(.5rem + var(--font-factor));
+        font-size: var(--fs-xs);
     }
 
     .start-button {
-        font-size: calc(.90rem + var(--font-factor));
+        font-size: var(--fs-base);
     }
 
     .home-intro {
-        gap: calc( 1rem + var(--font-factor));
+        gap: calc(1.8318vh + 3.1828vw);
     }
 
     .start-p {
-        font-size: calc(1rem + var(--font-factor));
+        font-size: var(--fs-sm);
+
     }
 
     .grades-item {
-    font-size: calc(.75rem + var(--font-factor));
+        font-size: var(--fs-base);
     }
 
     .niveaux-item {
-    font-size: calc( 0.63rem + var(--font-factor));
+        font-size: var(--fs-sm);
+
     }
 
     .header-heading {
-        font-size: calc(1rem + var(--font-factor));
+        font-size: var(--fs-md);
     }
 
     .list-item {
-        font-size: calc(.70rem + var(--font-factor));
+        font-size: var(--fs-base);
     }
 
     .nav-item {
-        font-size: calc(.70rem + var(--font-factor));
+        font-size: var(--fs--base);
     }
 
-}
-
-@media screen and (min-height: 700px ) and (orientation: portrait) {
-    .home {
-        justify-content: center;
-    }
-}
-
-/* @media screen and (min-height: 800px) and (orientation: portrait) {
-
-    .start-p {
-        font-size: calc(1.3rem + 0.2vw);
-    }
-
-    .grades-item {
-        font-size: calc(1.1rem + 0.2vw);
-    }
-
-    .niveaux-item {
-        font-size: calc(.9rem + 0.2vw);
-    }
-
-    .info-paragraph {
-        font-size: calc(1.1rem + 0.2vw);
-    }
-
-    .citado {
-        font-size: calc(.70rem + 1vw);
-    }
-
-    .nav-item {
-        font-size: 1.2rem;
-    }
-
-    .list-item {
-        font-size: calc(1rem + 0.2vw);
-    }
-    .header-heading {
-        font-size: calc(1.3rem + 0.2vw);
-        font-weight: 200;
-    }
-
-    .home {
-        justify-content: center;
-    }
-} */
-
- /* mid- tablet  */
-/* @media  (min-width: 480px) {
-    .nav-item {
-        padding: .4rem 1.4rem;
-    }
-} */
-
-/* large tablets */
-/* @media (min-width: 768px) {
-    .nav-item {
-        padding: .6rem 1.6rem;;
-    }
-    .list-item {
-        font-size: calc(1.4rem + 0.2vw);
-    }
-    .section-list {
-        gap: 1.5rem;
-    }
-
-    .start-button {
-        font-size: calc(1.3rem + 0.2vw);
-
-    }
-
-    .home {
-        gap: 2rem;
-    }
-
-    .home-header {
-        padding-bottom: 2rem;
-    }
     .main-content-p {
-        font-size: 3rem;
-
+        font-size: var(--fs-2xl);
     }
 
     .item-type {
-        font-size: 2rem;
-        font-weight: 200;
-
+        font-size: var(--fs-md);
     }
 
-    .niveaux-item {
-        font-size: calc(1rem + 0.2vw);
+}
+
+
+@media screen and (min-height: 700px ) and (orientation: portrait) {
+
+    .home {
+        justify-content: center;
     }
 
-    .info-paragraph {
-        font-size: calc(1.3rem + 0.2vw);
-    }
+}
 
-    .header-h1 {
-        font-size: 3rem;
-    }
-} */
+@media screen and (orientation: landscape) {
 
-/* @media (min-width: 950px) {
+}
+
+
+
+@media (min-width: 1090px)  {
 
     .desktop-screen {
         display: flex;
@@ -510,4 +474,4 @@ button {
         font-size:2.5rem;
         font-weight: bold;
     }
-} */
+}

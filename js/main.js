@@ -23,6 +23,12 @@ function updateHeight() {
     : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
 }
 
+function getWidth() {
+  let vw = `${window.innerWidth}px`;
+  document.documentElement.style.setProperty('--vw', vw);
+}
+
+
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
   a1: [1, 15],
@@ -147,7 +153,9 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", function () {
 
   updateHeight();
-window.addEventListener('resize', updateHeight);
+  window.addEventListener('resize', updateHeight);
+  getWidth();
+  window.addEventListener('resize', getWidth);
 
   toggleElement(home);
 
