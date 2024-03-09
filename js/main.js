@@ -14,19 +14,19 @@ const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName
 const [back] = Array.from(document.getElementsByClassName("main-icon"));
 
 
-function updateHeight() {
-  let isArrowHidden = back.classList.contains("hidden");
-  let isDivHidden = mainContentDiv.classList.contains("hidden");
-  let vh = window.innerHeight;
-    isArrowHidden && isDivHidden ?
-    document.documentElement.style.setProperty('--vh', `${vh}px`)
-    : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
-}
+// function updateHeight() {
+//   let isArrowHidden = back.classList.contains("hidden");
+//   let isDivHidden = mainContentDiv.classList.contains("hidden");
+//   let vh = window.innerHeight;
+//     isArrowHidden && isDivHidden ?
+//     document.documentElement.style.setProperty('--vh', `${vh}px`)
+//     : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
+// }
 
-function getWidth() {
-  let vw = `${window.innerWidth}px`;
-  document.documentElement.style.setProperty('--vw', vw);
-}
+// function getWidth() {
+//   let vw = `${window.innerWidth}px`;
+//   document.documentElement.style.setProperty('--vw', vw);
+// }
 
 
 // Mapeo de cadenas de ID a rangos
@@ -152,10 +152,10 @@ window.onload = function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  updateHeight();
-  window.addEventListener('resize', updateHeight);
-  getWidth();
-  window.addEventListener('resize', getWidth);
+  // updateHeight();
+  // window.addEventListener('resize', updateHeight);
+  // getWidth();
+  // window.addEventListener('resize', getWidth);
 
   toggleElement(home);
 
