@@ -254,7 +254,7 @@ button {
     width: 35vw;
     height: 13%;
     font-weight: light;
-    border-radius: 7px;
+    border-radius: 1vh;
     background-color:var(--boton2) ;
     display: flex;
     justify-content: center;
@@ -312,8 +312,6 @@ button {
 
 .nav-item {
     background-color: #b3b3b3;
-    display: flex;
-    justify-content: center;
     width: calc(4.0468vmax + 7.0313vmin);
     height: calc(2.5180vmax + 4.3750vmin);
     width: clamp(40px, 4.0468vmax + 7.0313vmin, 90px);
@@ -324,7 +322,12 @@ button {
     font-size: var(--fs-base);
 }
 
-.nav-link-item {
+.nav-item, .niveaux-item, .grades-item {
+    display: flex;
+    justify-content: center;
+}
+
+li a {
     width: 100%;
     height: 100%;
     display: flex;
