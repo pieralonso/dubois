@@ -1,7 +1,12 @@
-# Ignorar archivos temporales
 *.log
 *.tmp
 server.js
 .DS_store
 package.json
 prueba.js
+<<<<<<< HEAD
+=======
+package.json
+server.js
+getClamp.js
+>>>>>>> bugfix

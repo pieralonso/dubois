@@ -1,26 +1,33 @@
 import { duboisData } from "./duboisArray.js";
 const gradesLinks = Array.from(document.getElementsByClassName("grades-item"));
 const nivelesLink = Array.from(document.getElementsByClassName("niveaux-item"));
-const containers = Array.from(document.getElementsByClassName("container"));
 const sectionList = document.getElementById("sectionList");
 const navOptions = Array.from(document.getElementsByClassName("nav-item"));
 const contentHeading = document.getElementById("contentSectionHeading");
 const mainContentP = document.getElementById("mainContentP");
 const mainContentDiv = document.getElementById("mainContentPopUp");
 const startButton = document.getElementById("startButton");
-const visualHeight = `${visualViewport.height}px`;
 const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => array.some((arrayItem) => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
-const [back, backToNiveles] = Array.from(document.getElementsByClassName("main-icon"));
-const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon-svg-d" fill="white"viewBox="0 -960 960 960"><path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>`
+const [back] = Array.from(document.getElementsByClassName("main-icon"));
 
-containers.forEach(container => container.style.height = visualHeight);
-home.style.height = visualHeight;
-mainMenu.style.height = visualHeight;
-mainContent.style.height = visualHeight;
-mainContentDiv.style.height = visualHeight;
+
+// function updateHeight() {
+//   let isArrowHidden = back.classList.contains("hidden");
+//   let isDivHidden = mainContentDiv.classList.contains("hidden");
+//   let vh = window.innerHeight;
+//     isArrowHidden && isDivHidden ?
+//     document.documentElement.style.setProperty('--vh', `${vh}px`)
+//     : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
+// }
+
+// function getWidth() {
+//   let vw = `${window.innerWidth}px`;
+//   document.documentElement.style.setProperty('--vw', vw);
+// }
+
 
 // Mapeo de cadenas de ID a rangos
 const idToRango = {
@@ -28,6 +35,27 @@ const idToRango = {
   a2: [16, 19],
   b1: [20, 23],
   b2: [24, 43],
+};
+// mapeo funciones para ir hacia atras
+const backActions = {
+    'backToHome': () => {
+        toggleElement(home);
+        document.getElementById('headerIcon').classList.add("hidden");
+    },
+    'backToMenu': () => {
+        toggleElement(mainMenu);
+        back.id = 'backToHome'
+    },
+    'backToMots' : () => {
+      back.id = 'backToMenu'
+      mainContentDiv.classList.add("hidden");
+      document.getElementById("mainContentWrapper").classList.remove("hidden");
+      Array.from(document.getElementsByClassName("item-type")).forEach(
+        function (item) {
+          item.classList.add("hidden");
+        },
+      );
+    },
 };
 
 function selectedGradeTitle() {
@@ -39,43 +67,39 @@ function selectedGradeTitle() {
 
 function toggleInfo() {
   [...document.getElementsByClassName("list-item")].forEach(item => {
-    item.addEventListener("click", function () {
+    // Elimina el event listener existente
+    item.removeEventListener("click", item.clickHandler);
+
+
+    // Define el event listener
+    item.clickHandler = function () {
+      back.id = 'backToMots';
       mainContentP.innerHTML = "";
-      fadeIn(mainContentP, 1);
+      fadeIn(mainContentP);
+      item.children[0].classList.remove("hidden");
       mainContentP.innerHTML = item.innerHTML;
-      mainContentDiv.style.display = "flex";
-      [...document.getElementsByClassName("item-type")].forEach(type => {
-        type.style.display = "block";
-      },
-      );
-    });
-  },
-  );
+      mainContentDiv.classList.remove("hidden");
+      document.getElementById("mainContentWrapper").classList.add("hidden")
+    };
+
+    // Añade el event listener
+    item.addEventListener("click", item.clickHandler);
+  });
 }
 
-function fadeIn(htmlElement, n) {
-  htmlElement.style.animation = `fadeIn ${n}s ease`;
+function fadeIn(htmlElement) {
+  htmlElement.classList.remove("fadeIn");
+  void htmlElement.offsetWidth;
+  htmlElement.classList.add("fadeIn");
 }
 
 function toggleElement(elementToShow) {
-  [home, mainMenu, mainContent].forEach(
-    function (element) {
-      element.classList.add("hidden");
-    },
-  );
-  elementToShow.classList.remove("hidden");
-  fadeIn(elementToShow, 1);
-}
-
-function toggleElements(element1, element2) {
-  [home, mainMenu, mainContent].forEach(function (element) {
-    element.classList.add("hidden");
+  [home, mainMenu, mainContent].forEach( element => {
+    element.classList.add("hidden")
   });
-  element1.classList.remove("hidden");
-  element2.classList.remove("hidden");
 
-  fadeIn(element1, 1);
-  fadeIn(element2, 1);
+  elementToShow.classList.remove("hidden");
+  fadeIn(elementToShow, 2);
 }
 
 function distribuirPalabrasEnArrays(arrayPalabras) {
@@ -115,7 +139,7 @@ function crearListaDeRango(a, b, nivel, section) {
 
   return distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[nivel][section]
     .map(element => {
-      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type">${element.type}</span></li>`);
+      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type hidden" id="itemType">${element.type}</span></li>`);
       return element;
     });
 }
@@ -127,85 +151,58 @@ window.onload = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  // updateHeight();
+  // window.addEventListener('resize', updateHeight);
+  // getWidth();
+  // window.addEventListener('resize', getWidth);
+
+  toggleElement(home);
+
   mainContentDiv.addEventListener("click", function (event) {
     if (event.target.id !== mainContentP.id) {
-      mainContentDiv.style.display = "none";
+      back.id = 'backToMenu';
+      mainContentDiv.classList.add("hidden");
+      document.getElementById("mainContentWrapper").classList.remove("hidden");
       Array.from(document.getElementsByClassName("item-type")).forEach(
         function (item) {
-          item.style.display = "none";
+          item.classList.add("hidden");
         },
       );
     }
   });
-  toggleElement(home);
-  startButton.addEventListener("click", () =>
-    visualViewport.width > 600
-      ? toggleElements(mainMenu, mainContent)
-      : toggleElement(mainMenu),
-  );
 
-  backToNiveles.addEventListener("click", () => toggleElement(mainMenu));
-  backToNiveles.addEventListener("click", () =>
-    nivelesLink.forEach((i) => i.classList.remove("selected")),
-  );
-  back.addEventListener("click", function () {
-    if (back.id === "backToView") {
-      gradesLinks.forEach((item) => item.classList.remove("clicked"));
-      gradesLinks.forEach((item) => item.classList.remove("hidden"));
-      document.getElementById("navNiveaux").style.display = "none";
-      document.getElementById("menuHeader").style.height = "100%";
-      document.getElementById("startP").style.display = "flex";
-      back.id = "backToHome";
-    } else if (back.id === "backToHome") {
-      toggleElement(home);
-    }
+  startButton.addEventListener("click", function () {
+    toggleElement(mainMenu);
+    document.getElementById('headerIcon').classList.remove("hidden");
+    gradesLinks.forEach(element => element.classList.remove("clicked"));
+    gradesLinks[0].classList.add("clicked");
+
+  });
+
+  back.addEventListener("click", () => {
+      const action = backActions[back.id];
+      action();
+
   });
 
   nivelesLink.forEach((element) =>
-    element.addEventListener("click", () =>
-      visualViewport.width > 600 ?
-        toggleElements(mainMenu, mainContent) : toggleElement(mainContent),
+    element.addEventListener("click", function() {
+      toggleElement(mainContent);
+      back.id = "backToMenu";
+        }
     ),
   );
 
   gradesLinks.forEach((element) => {
-    let currentText = element.children[0].innerHTML
-    element.addEventListener('mouseenter', function() {
-      element.classList.contains("clicked") ?
-      element.children[0].innerHTML = arrowIcon :
-      element.children[0].innerHTML = currentText
-      });
 
-    element.addEventListener('mouseleave', function() {
-      element.classList.contains("clicked") ?
-      element.children[0].innerHTML = currentText :
-      element.children[0].innerHTML = currentText
-      })
-
-    element.addEventListener("click", function () {
-      if (!element.classList.contains("clicked")) {
-        back.id = "backToView";
+    element.addEventListener("click", () => {
+      const isClicked = element.classList.contains("clicked");
+      if (!isClicked) {
         gradesLinks.forEach((item) => item.classList.remove("clicked"));
         element.classList.add("clicked");
-        gradesLinks.forEach((item) => item.classList.add("hidden"));
-        element.classList.remove("hidden");
-        document.getElementById("navNiveaux").style.display = "flex";
-        document.getElementById("menuHeader").style.height = "10%";
-        document.getElementById("startP").style.display = "none";
-      } else if (element.classList.contains("clicked")) {
-        element.children[0].innerHTML = currentText;
-        back.id = "backToHome";
-        gradesLinks.forEach((item) => item.classList.remove("clicked"));
-        gradesLinks.forEach((item) => item.classList.remove("hidden"));
-        document.getElementById("navNiveaux").style.display = "none";
-        document.getElementById("menuHeader").style.height = "100%";
-        document.getElementById("startP").style.display = "flex";
-        visualViewport.width > 600
-          ? (document.getElementById("startP").style.display = "none")
-          : (document.getElementById("startP").style.display = "flex");
       }
-
-      fadeIn(document.getElementById("navNiveaux"), 1);
+      fadeIn(document.getElementById('navNiveaux'))
     });
   });
 
@@ -249,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           Array.from(document.getElementsByClassName("list-item")).forEach(
             function (b) {
-              fadeIn(b, 4);
+              fadeIn(b);
             },
           );
         });
