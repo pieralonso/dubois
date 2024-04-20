@@ -4,9 +4,11 @@ server.js
 .DS_store
 package.json
 prueba.js
+app.js
 <<<<<<< HEAD
 =======
 package.json
 server.js
+app.js
 getClamp.js
 >>>>>>> bugfix
