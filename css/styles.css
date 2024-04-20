@@ -345,7 +345,7 @@ li a {
 
 .main-content-popup {
     display: flex;
-
+    gap: 30px;
     background-color: var(--bg-color);
     flex-direction: column;
     letter-spacing: 4px;
@@ -355,6 +355,14 @@ li a {
     z-index: 9999;
     height: 100%;
     width: 100%;
+}
+
+.main-content-popup > small {
+    font-size:.7rem;
+    letter-spacing: 1px;
+    font-style: italic;
+    color: var(--text-paragraph);
+    text-align: center;
 }
 
 .main-content-p {
@@ -375,6 +383,11 @@ li a {
     height: clamp(20px, 1.7986vmax + 3.1250vmin, 50px);
 }
 
+.popup-image{
+
+    width: 60%;
+    border-radius: 7px;
+}
 
 
 .selected {

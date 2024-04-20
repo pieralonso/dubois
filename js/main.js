@@ -8,25 +8,30 @@ const mainContentP = document.getElementById("mainContentP");
 const mainContentDiv = document.getElementById("mainContentPopUp");
 const startButton = document.getElementById("startButton");
 const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+const apiKey = "Aj3N07DBkIyWUshzWGltlEL9I40rT2pAHFXCbIYJHLrmkZPRFXL26ohR"
 const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => array.some((arrayItem) => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back] = Array.from(document.getElementsByClassName("main-icon"));
+const popupImage = document.querySelector(".popup-image");
 
 
-// function updateHeight() {
-//   let isArrowHidden = back.classList.contains("hidden");
-//   let isDivHidden = mainContentDiv.classList.contains("hidden");
-//   let vh = window.innerHeight;
-//     isArrowHidden && isDivHidden ?
-//     document.documentElement.style.setProperty('--vh', `${vh}px`)
-//     : document.documentElement.style.setProperty('--vh', `${vh - 41}px`);
-// }
+const fetchImages = async (apiURL) => {
+  try {
+    const response = await fetch(apiURL, {
+      headers: { Authorization: apiKey },
+    });
 
-// function getWidth() {
-//   let vw = `${window.innerWidth}px`;
-//   document.documentElement.style.setProperty('--vw', vw);
-// }
+    if (!response.ok) {
+      throw new Error(`HTTP Error! status=${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Fetch error", error);
+  }
+};
+
+
 
 
 // Mapeo de cadenas de ID a rangos
@@ -62,7 +67,7 @@ function selectedGradeTitle() {
   const selectedGrade = gradesLinks.find((grade) =>
     grade.className.includes("clicked"),
   );
-  return selectedGrade ? selectedGrade.innerHTML : null;
+  return selectedGrade && selectedGrade.innerHTML;
 }
 
 function toggleInfo() {
@@ -75,8 +80,16 @@ function toggleInfo() {
     item.clickHandler = function () {
       back.id = 'backToMots';
       mainContentP.innerHTML = "";
+      popupImage.src = "";
       fadeIn(mainContentP);
       item.children[0].classList.remove("hidden");
+      let query = item.innerHTML.split("-")[2];
+      console.log(query);
+      let apiURL = `https://api.pexels.com/v1/search?query=${query}&orientation=portrait&size=medium&locale=en-US&page=1&per_page=1&` 
+      fetchImages(apiURL).then((data) => {
+        let result = data.photos[0].src.medium;
+        popupImage.src = result;
+       });
       mainContentP.innerHTML = item.innerHTML;
       mainContentDiv.classList.remove("hidden");
       document.getElementById("mainContentWrapper").classList.add("hidden")
@@ -139,7 +152,7 @@ function crearListaDeRango(a, b, nivel, section) {
 
   return distribuirPalabrasEnArrays(palabrasEchelon(rango(a, b)))[nivel][section]
     .map(element => {
-      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item">${element.nom}<span class="item-type hidden" id="itemType">${element.type}</span></li>`);
+      sectionList.insertAdjacentHTML('beforeend', `<li class="list-item"> ${element.nom} <span class="item-type hidden" id="itemType">${element.type}</span><span id="translation" class="traduction hidden">-${element.translation}-</li>`);
       return element;
     });
 }
@@ -222,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     element.addEventListener("click", function () {
       nivelesLink.forEach((i) => i.classList.remove("nivel-selected"));
       element.classList.add("nivel-selected");
-      const nivel = index + 1;
+      let nivel = index + 1;
 
       // Iterar sobre el objeto idToRango
       Object.entries(idToRango).forEach(([cadena, rango]) => {
