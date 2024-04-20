@@ -8,12 +8,12 @@ const mainContentP = document.getElementById("mainContentP");
 const mainContentDiv = document.getElementById("mainContentPopUp");
 const startButton = document.getElementById("startButton");
 const rango = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+const apiKey = "Aj3N07DBkIyWUshzWGltlEL9I40rT2pAHFXCbIYJHLrmkZPRFXL26ohR"
 const filtrarPor = (propiedad) => (array) => duboisData.filter((elemento) => array.some((arrayItem) => elemento[propiedad] === arrayItem));
 const palabrasEchelon = filtrarPor("echelon");
 const [home, mainMenu, mainContent] = Array.from(document.getElementsByClassName("section"));
 const [back] = Array.from(document.getElementsByClassName("main-icon"));
 const popupImage = document.querySelector(".popup-image");
-const apiKey = "Aj3N07DBkIyWUshzWGltlEL9I40rT2pAHFXCbIYJHLrmkZPRFXL26ohR"
 
 
 const fetchImages = async (apiURL) => {
@@ -85,7 +85,7 @@ function toggleInfo() {
       item.children[0].classList.remove("hidden");
       let query = item.innerHTML.split("-")[2];
       console.log(query);
-      let apiURL = `https://api.pexels.com/v1/search?query=${query}` 
+      let apiURL = `https://api.pexels.com/v1/search?query=${query}&orientation=portrait&size=medium&locale=en-US&page=1&per_page=1&` 
       fetchImages(apiURL).then((data) => {
         let result = data.photos[0].src.medium;
         popupImage.src = result;
