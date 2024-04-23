@@ -25,7 +25,8 @@ const fetchImages = async (apiURL) => {
     if (!response.ok) {
       throw new Error(`HTTP Error! status=${response.status}`);
     }
-    return await response.json();
+    const data = await response.json();
+    return data ;
   } catch (error) {
     console.error("Fetch error", error);
   }
@@ -52,6 +53,7 @@ const backActions = {
         back.id = 'backToHome'
     },
     'backToMots' : () => {
+      endTimeout();
       back.id = 'backToMenu'
       mainContentDiv.classList.add("hidden");
       document.getElementById("mainContentWrapper").classList.remove("hidden");
@@ -70,6 +72,12 @@ function selectedGradeTitle() {
   return selectedGrade && selectedGrade.innerHTML;
 }
 
+let timeoutID = null;
+const endTimeout = () => {
+    clearTimeout(timeoutID);
+    timeoutID = null;
+}
+
 function toggleInfo() {
   [...document.getElementsByClassName("list-item")].forEach(item => {
     // Elimina el event listener existente
@@ -85,11 +93,22 @@ function toggleInfo() {
       item.children[0].classList.remove("hidden");
       let query = item.innerHTML.split("-")[2];
       console.log(query);
-      let apiURL = `https://api.pexels.com/v1/search?query=${query}&orientation=portrait&size=medium&locale=en-US&page=1&per_page=1&` 
-      fetchImages(apiURL).then((data) => {
-        let result = data.photos[0].src.medium;
-        popupImage.src = result;
-       });
+      let apiURL = `https://api.pexels.com/v1/search?query=${query}&orientation=portrait&size=medium&locale=en-US&page=1&per_page=10&`; 
+      (async () => {
+        const r =   await fetchImages(apiURL)
+        for(let i of r.photos) {
+            let result = i.src.medium;
+            popupImage.src = result;
+            await new Promise(r => {timeoutID = setTimeout(r, 2000)});
+        }
+      })();
+      
+
+
+    //   fetchImages(apiURL).then((data) => {
+    //     let result = data.photos[0].src.medium;
+    //     popupImage.src = result;
+    //    });
       mainContentP.innerHTML = item.innerHTML;
       mainContentDiv.classList.remove("hidden");
       document.getElementById("mainContentWrapper").classList.add("hidden")
@@ -173,7 +192,9 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleElement(home);
 
   mainContentDiv.addEventListener("click", function (event) {
-    if (event.target.id !== mainContentP.id) {
+    const itemType = document.getElementById("itemType").id;
+    if (event.target.id !== popupImage.id && event.target.id !== mainContentP.id && event.target.id !== itemType) {
+      endTimeout();
       back.id = 'backToMenu';
       mainContentDiv.classList.add("hidden");
       document.getElementById("mainContentWrapper").classList.remove("hidden");
